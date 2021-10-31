@@ -21,7 +21,8 @@
                   </h1>
               </a> 
                            
-              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+              <a role="button" class="navbar-burger" aria-label="menu" 
+              aria-expanded="false">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -50,6 +51,7 @@
     </header>
 
     <main class="mt-5">
+        
         <!-- PANEL CENTRAL HOME - CONTENEDOR DE LAS 3 CARDS -->
         <div class="container mt-6">
         <div class="columns is-multiline">
@@ -61,16 +63,16 @@
                         Balance
                     </h2>
                     <div class="columns">
-                        <div class="column is-9 is-size-5">Ganancias</div>
-                        <div class="column is-3 is-size-5 has-text-primary">+$0</div>
+                        <div class="column is-6 is-size-5">Ganancias</div>
+                        <div class="column is-6 is-size-5 has-text-primary">+$0</div>
                     </div>
                     <div class="columns">
-                        <div class="column is-9 is-size-5">Gastos</div>
-                        <div class="column is-3 is-size-5 has-text-danger">+$0</div>
+                        <div class="column is-6 is-size-5">Gastos</div>
+                        <div class="column is-6 is-size-5 has-text-danger">+$0</div>
                     </div>
                     <div class="columns">
-                        <div class="column is-9 is-size-3">Total</div>
-                        <div class="column is-3 is-size-4">+$0</div>
+                        <div class="column is-6 is-size-3">Total</div>
+                        <div class="column is-6 is-size-4">+$0</div>
                     </div>
                 </div>
 
@@ -85,11 +87,78 @@
                         <div class="column has-text-right has-text-info">
                             <p>Ocultar Filtros</p>
                         </div>
+
                     </div>
 
-                    <!-- Desplegables -->
-                    
+                    <!-- Formulario - campos datos -->
+                    <form >
+                        <div class="field">
+                            <label class="label">Tipo</label> 
+                                <div class="control">
+                                    <div class="select is is-fullwidth">
+                                        <select class="select">
+                                            <option>Todos</option>
+                                            <option>Gastos</option>
+                                            <option>Ganancias</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div> 
+                        
+                        <div class="field">
+                            <label class="label">Tipo</label> 
+                                <div class="control">
+                                    <div class="select is is-fullwidth">
+                                        <select class="select">
+                                            <option>Todos</option>
+                                            <option>Gastos</option>
+                                            <option>Ganancias</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>         
 
+                        <div class="field">
+                            <label class="label">Categoría</label> 
+                                <div class="control">
+                                    <div class="select is is-fullwidth">
+                                        <select class="select">
+                                            <option>Todos</option>
+                                            <option>Comida</option>
+                                            <option>Transporte</option>
+                                            <option>Servicios</option>
+                                            <option>Salidas</option>
+                                            <option>Educación</option>
+                                            <option>Trbajo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                        
+                        <div class="field">
+                            <label class="label">Desde</label> 
+                                <div class="control">
+                                    <input class="input my-1" type="date"> 
+                                </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Ordenar por:</label> 
+                                <div class="control">
+                                    <div class="select is is-fullwidth">
+                                        <select class="select">
+                                            <option>Más reciente</option>
+                                            <option>Menos reciente</option>
+                                            <option>Mayor monto</option>
+                                            <option>Menor monto</option>
+                                            <option>A - Z</option>
+                                            <option>Z- A</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                    </form>
+                    
                 </div>
             </div>
 
