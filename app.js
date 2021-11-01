@@ -6,10 +6,12 @@ const mostrarOcultarFiltros = document.querySelector("#mostrar-ocultar-filtros")
 const formularioFiltros = document.querySelector("#formulario-filtros")
 
 const main = document.querySelector("#main")
-const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion")
+
 const cardNuevaOperacion = document.querySelector("#card-nueva-operacion")
 const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion")
 const botonCancelarAgregarOperacion = document.querySelector("#cancelar-agregar-operacion")
+
+const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion")
 const sectionCardCategorias = document.querySelector("#section-card-categorias")
 const sectionCardReportes = document.querySelector("#section-card-reportes")
 
@@ -50,7 +52,6 @@ mostrarOcultarFiltros.addEventListener("click", ()=>{
  }
 
  //MOSTRAR OCULTAR CARD REPORTES
-
  linkReportesNav.onclick =()=>{
     sectionCardReportes.classList.remove("is-hidden")
     main.classList.add("is-hidden")
