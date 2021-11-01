@@ -31,11 +31,11 @@
             
             <div class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item">
+                    <a class="navbar-item" id="link-balance">
                         <i class="fas fa-balance-scale mr-2"></i>
                         Balance
                     </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" id="link-categorias">
                         <i class="fas fa-tags mr-2"></i>
                         Categorias
                     </a>
@@ -47,11 +47,10 @@
             </div>
             
           </nav>
-           <!--FIN NAV BAR -->
+        <!--FIN NAV BAR -->
     </header>
 
     <main class="mt-5" id="main">
-        
         <!-- PANEL CENTRAL HOME - CONTENEDOR DE LAS 3 CARDS -->
         <div class="container mt-6 mb-6">
         <div class="columns is-multiline">
@@ -192,84 +191,112 @@
                 </div>
             </div>
              <!-- FIN CARD OPERACIONES -->
-
-
-
     </main>
     
+    <!-- VENTANA NUEVA OPERACIÓN -->
     <section class="is-hidden mt-4" id="section-card-nueva-operacion">
-                <!-- VENTANA NUEVA OPERACIÓN -->
-                <div class="container" id="card-nueva-operacion">
-                    <div class="columns is-multiline">
-                        <div class="column is-10 is-offset-1">
-                            <div class="box">
-                                <h2 class="title is-size-2">Nueva Operación</h2>
+        <div class="container" id="card-nueva-operacion">
+            <div class="columns is-multiline">
+                 <div class="column is-10 is-offset-1">
+                    <div class="box">
+                        <h2 class="title is-size-2">Nueva Operación</h2>
         
-                                <form action="">
-                                    <div class="field ml-6 mr-6">
-                                        <label class="label">Descripción</label>
-                                            <div class="control">
-                                                <input class="input my-1" type="text"> 
-                                            </div>
-                                    </div>
+                            <form action="">
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Descripción</label>
+                                        <div class="control">
+                                            <input class="input my-1" type="text"> 
+                                        </div>
+                                </div>
         
-                                    <div class="field ml-6 mr-6">
-                                        <label class="label">Monto</label>
-                                            <div class="control">
-                                                <input class="input my-1" ype="number"> 
-                                            </div>
-                                    </div>
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Monto</label>
+                                        <div class="control">
+                                            <input class="input my-1" ype="number"> 
+                                        </div>
+                                </div>
         
-                                    <div class="field ml-6 mr-6">
-                                        <label class="label">Tipo</label> 
-                                            <div class="control">
-                                                <div class="select is is-fullwidth">
-                                                    <select class="select">
-                                                        <option>Todos</option>
-                                                        <option>Gastos</option>
-                                                        <option>Ganancias</option>
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Tipo</label> 
+                                        <div class="control">
+                                             <div class="select is is-fullwidth">
+                                                <select class="select">
+                                                    <option>Todos</option>
+                                                    <option>Gastos</option>
+                                                    <option>Ganancias</option>
                                                     </select>
-                                                </div>
                                             </div>
-                                    </div>         
+                                        </div>
+                                </div>         
         
-                                    <div class="field ml-6 mr-6">
-                                        <label class="label">Categoría</label> 
-                                            <div class="control">
-                                                <div class="select is is-fullwidth">
-                                                    <select class="select">
-                                                        <option>Todos</option>
-                                                        <option>Comida</option>
-                                                        <option>Transporte</option>
-                                                        <option>Servicios</option>
-                                                        <option>Salidas</option>
-                                                        <option>Educación</option>
-                                                        <option>Trbajo</option>
-                                                    </select>
-                                                </div>
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Categoría</label> 
+                                        <div class="control">
+                                            <div class="select is is-fullwidth">
+                                                <select class="select">
+                                                    <option>Todos</option>
+                                                    <option>Comida</option>
+                                                    <option>Transporte</option>
+                                                    <option>Servicios</option>
+                                                    <option>Salidas</option>
+                                                    <option>Educación</option>
+                                                    <option>Trbajo</option>
+                                                </select>
                                             </div>
-                                    </div>
+                                        </div>
+                                </div>
         
-                                    <div class="field ml-6 mr-6">
-                                        <label class="label">Desde</label> 
-                                            <div class="control">
-                                                <input class="input my-1" type="date"> 
-                                            </div>
-                                    </div>
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Desde</label> 
+                                        <div class="control">
+                                            <input class="input my-1" type="date"> 
+                                        </div>
+                                </div>
         
-                                    <div class="buttons mt-6 mb-3">
-                                        <button class="button is-light" id="cancelar-agregar-operacion"> Cancelar </button>
-                                        <button class="button is-success"> Agregar </button>
-                                    </div>
+                                <div class="buttons mt-6 mb-3">
+                                    <button class="button is-light" id="cancelar-agregar-operacion"> Cancelar </button>
+                                    <button class="button is-success"> Agregar </button>
+                                </div>
         
-                                </form>
+                            </form>
         
                             </div>
                         </div>
+            </div>
+        </div>
+                
+    </section>
+    <!-- FIN NUEVA OPERACIÓN -->
+    
+    <!-- VENTANA CATEGORIAS -->
+    <section class="is-hidden mt-4" id="section-card-categorias">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column is-10 is-offset-1">
+                    <div class="box">
+                       <h2 class="title is-size-2">Categorias</h2>
+                       <label class="label mt-6">Nombre</label>
+                        <div class="field is-grouped">
+                            <div class="control is-expanded">
+                                <input class= "input" type="text">
+                            </div>
+                            <div class="control">
+                                <button class="button is-success">Agregar</button>
+                            </div>
+                        </div>
+
+                        <div>aca hay que agregar las columnas con las pildoras de las caregorias y las acciones editar - eliminar
+                        </div>
+                        
+
                     </div>
                 </div>
-                <!-- FIN NUEVA OPERACIÓN -->
+                
+                
+            </div>
+        </div>
     </section>
+    <!-- FIN CATEGORIAS -->
 
     <script src="./app.js"></script>
 </body>
