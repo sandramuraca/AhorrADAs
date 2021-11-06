@@ -77,6 +77,31 @@ const categorias = [
   "Trabajo",
 ];
 
+const estructuraHtml = categorias.reduce((acc, elemento) => {
+  return (
+    acc +
+    ` <div class="columns" >
+    <div class="column">
+      <div class="columns mt-4">
+        <div class="column is-10">
+          <p class="tag">${elemento}</p>
+        </div>
+        <div class="column is-2">
+          <div class="columns has">
+            <button class="button is-ghost is-small">Editar</button>
+            <button class="button is-ghost is-small">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`
+  )
+}, ``)
+
+listadoCategorias.innerHTML = estructuraHtml;
+
 //MOSTRAR OCULTAR CARD REPORTES
 linkReportesNav.onclick = () => {
   sectionCardReportes.classList.remove("is-hidden");
