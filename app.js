@@ -13,7 +13,13 @@ const botonCancelarAgregarOperacion = document.querySelector("#cancelar-agregar-
 
 const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion")
 const sectionCardCategorias = document.querySelector("#section-card-categorias")
+const inputAgregarCategoria = document.querySelector("#input-agregar-categoria")
+const botonAgregarCategoria = document.querySelector("#boton-agregar-categoria")
+const listadoCategorias = document.querySelector("#listado-categorias")
+
 const sectionCardReportes = document.querySelector("#section-card-reportes")
+
+
 
 //MOSTRAR OCULTAR FILTROS - MENU IZQUIERDO
 mostrarOcultarFiltros.addEventListener("click", ()=>{

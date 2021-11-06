@@ -266,15 +266,30 @@
                        <label class="label mt-6">Nombre</label>
                         <div class="field is-grouped">
                             <div class="control is-expanded">
-                                <input class= "input" type="text">
+                                <input class= "input" type="text" id="input-agregar-categorias">
                             </div>
                             <div class="control">
-                                <button class="button is-success">Agregar</button>
+                                <button class="button is-success" id="boton-agregar-categoria">Agregar</button>
                             </div>
                         </div>
 
-                        <div>aca hay que agregar las columnas con las pildoras de las caregorias y las acciones editar - eliminar
-                        </div>
+                        <div class="columns" id="listado-categorias">
+                            <div class="column">
+                              <div class="columns mt-4">
+                                <div class="column is-10">
+                                  <p class="tag">Comida</p>
+                                </div>
+                                <div class="column is-2">
+                                  <div class="columns has">
+                                    <button class="button is-ghost is-small">Editar</button>
+                                    <button class="button is-ghost is-small">
+                                      Eliminar
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         
 
                     </div>
