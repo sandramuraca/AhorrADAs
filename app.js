@@ -24,7 +24,7 @@ const sectionCardCategorias = document.querySelector(
   "#section-card-categorias"
 );
 const inputAgregarCategoria = document.querySelector(
-  "#input-agregar-categoria"
+  "#input-agregar-categorias"
 );
 const botonAgregarCategoria = document.querySelector(
   "#boton-agregar-categoria"
@@ -69,7 +69,7 @@ linkBalanceNav.onclick = () => {
   main.classList.remove("is-hidden");
 };
 
-//ARRAY LISTADO CATEGORIAS
+//ARRAY LISTADO CATEGORIAS POR DEFECTO
 const categorias = [
   "Comidas",
   "Servicios",
@@ -77,32 +77,48 @@ const categorias = [
   "Educación",
   "Transporte",
   "Trabajo",
+  "Salud"
 ];
 
-const estructuraHtml = categorias.reduce((acc, elemento) => {
-  return (
-    acc +
-    ` <div class="columns" >
-         <div class="column">
-            <div class="columns mt-4">
-               <div class="column is-10">
-               <p class="tag">${elemento}</p>-
-               </div>
-            <div class="column is-2">
-            <div class="columns has">
-               <button class="button is-ghost is-small">Editar</button>
-                  <button class="button is-ghost is-small">
-                  Eliminar
-                  </button>
-            </div>
-            </div>
-            </div>
-         </div>
-   </div>`
-  )
-}, ``)
+// FUNCION PARA MOSTRAR CATEGORIAS EN HTML
+const agregarCategoriasAlABMDeCategorias = () =>{
+  const estructuraHtml = categorias.reduce((acc, elemento) => {
+    return (
+      acc +
+      ` <div class="columns" >
+           <div class="column">
+              <div class="columns mt-4">
+                 <div class="column is-10">
+                 <p class="tag">${elemento}</p>
+                 </div>
+              <div class="column is-2">
+              <div class="columns has">
+                 <button class="button is-ghost is-small">Editar</button>
+                    <button class="button is-ghost is-small">
+                    Eliminar
+                    </button>
+              </div>
+              </div>
+              </div>
+           </div>
+     </div>`
+    )
+  }, ``)
+  listadoCategorias.innerHTML = estructuraHtml;
+}
 
-listadoCategorias.innerHTML = estructuraHtml;
+agregarCategoriasAlABMDeCategorias()
+
+
+// BOTON AGREGAR CATEGORIA AL ABM
+botonAgregarCategoria.onclick = (e) =>{
+
+  const categoriaAgregada = inputAgregarCategoria.value;
+  inputAgregarCategoria.value = "";
+  categorias.push(categoriaAgregada);
+  
+  agregarCategoriasAlABMDeCategorias();
+}
 
 //MOSTRAR OCULTAR CARD REPORTES
 linkReportesNav.onclick = () => {
