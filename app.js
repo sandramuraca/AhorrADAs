@@ -31,8 +31,6 @@ const botonAgregarCategoria = document.querySelector(
 );
 const listadoCategorias = document.querySelector("#listado-categorias");
 
-
-
 const sectionCardReportes = document.querySelector("#section-card-reportes");
 
 //MOSTRAR OCULTAR FILTROS - MENU IZQUIERDO
@@ -77,11 +75,27 @@ const categorias = [
   "Educación",
   "Transporte",
   "Trabajo",
-  "Salud"
+  "Salud",
 ];
 
+// TRAER DATA DE LOCALSTORAGE
+const obtenerCategorias = () => {
+  const categoriasGuardadasEnElLocalStorage =
+    localStorage.getItem("categorias");
+  const categoriasGuardadasJSONaJS = JSON.parse(
+    categoriasGuardadasEnElLocalStorage
+  );
+  if (categoriasGuardadasEnElLocalStorage === null) {
+    return categorias;
+  } else {
+    return categoriasGuardadasJSONaJS;
+  }
+};
+
 // FUNCION PARA MOSTRAR CATEGORIAS EN HTML
-const agregarCategoriasAlABMDeCategorias = () =>{
+
+const agregarCategoriasAlABMDeCategorias = () => {
+  const categorias = obtenerCategorias();
   const estructuraHtml = categorias.reduce((acc, elemento) => {
     return (
       acc +
@@ -102,34 +116,24 @@ const agregarCategoriasAlABMDeCategorias = () =>{
               </div>
            </div>
      </div>`
-    )
-  }, ``)
+    );
+  }, ``);
   listadoCategorias.innerHTML = estructuraHtml;
-}
+};
 
-agregarCategoriasAlABMDeCategorias()
-
+agregarCategoriasAlABMDeCategorias();
 
 // BOTON AGREGAR CATEGORIA AL ABM
-botonAgregarCategoria.onclick = (e) =>{
-
+botonAgregarCategoria.onclick = (e) => {
   const categoriaAgregada = inputAgregarCategoria.value;
   inputAgregarCategoria.value = "";
   categorias.push(categoriaAgregada);
-  
+
   agregarCategoriasAlABMDeCategorias();
-  const categoriasAJSON = JSON.stringify(categorias)
-   localStorage.setItem("categorias", categoriasAJSON) 
-   console.log(categoriasAJSON)
-}
-
-
-
-
-
-
-
-
+  const categoriasAJSON = JSON.stringify(categorias);
+  localStorage.setItem("categorias", categoriasAJSON);
+  console.log(categoriasAJSON);
+};
 
 //MOSTRAR OCULTAR CARD REPORTES
 linkReportesNav.onclick = () => {
