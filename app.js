@@ -118,7 +118,18 @@ botonAgregarCategoria.onclick = (e) =>{
   categorias.push(categoriaAgregada);
   
   agregarCategoriasAlABMDeCategorias();
+  const categoriasAJSON = JSON.stringify(categorias)
+   localStorage.setItem("categorias", categoriasAJSON) 
+   console.log(categoriasAJSON)
 }
+
+
+
+
+
+
+
+
 
 //MOSTRAR OCULTAR CARD REPORTES
 linkReportesNav.onclick = () => {
