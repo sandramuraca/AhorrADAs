@@ -99,23 +99,23 @@ const agregarCategoriasAlABMDeCategorias = () => {
   const estructuraHtml = categorias.reduce((acc, elemento) => {
     return (
       acc +
-      ` <div class="columns" >
-           <div class="column">
-              <div class="columns mt-4">
-                 <div class="column is-10">
-                 <p class="tag">${elemento}</p>
-                 </div>
-              <div class="column is-2">
-              <div class="columns has">
-                 <button class="button is-ghost is-small">Editar</button>
-                    <button class="button is-ghost is-small">
-                    Eliminar
-                    </button>
+      ` 
+        <div class="columns" >
+          <div class="column">
+            <div class="columns is-vcentered is-mobile mt-4">
+              <div class="column is-9">
+                <p class="tag">${elemento}</p>
               </div>
+              <div class="column is-3">
+                <div class="columns is-justify-content-flex-end is-mobile">
+                  <button class="button is-ghost is-small">Editar</button>
+                  <button class="button is-ghost is-small">Eliminar</button>
+                </div>
               </div>
-              </div>
-           </div>
-     </div>`
+            </div>
+          </div>
+        </div>
+      `
     );
   }, ``);
   listadoCategorias.innerHTML = estructuraHtml;
