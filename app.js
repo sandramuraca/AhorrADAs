@@ -6,6 +6,7 @@ const mostrarOcultarFiltros = document.querySelector(
   "#mostrar-ocultar-filtros"
 );
 const formularioFiltros = document.querySelector("#formulario-filtros");
+const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
 
 const main = document.querySelector("#main");
 
@@ -120,19 +121,37 @@ const agregarCategoriasAlABMDeCategorias = () => {
   }, ``);
   listadoCategorias.innerHTML = estructuraHtml;
 };
-
 agregarCategoriasAlABMDeCategorias();
 
+//ACTUALIZACION DE CATEGORIAS DE SELECT DE CARD FILTROS
+
+const actualizarCategoriasDeCardFiltros = () => {
+  const categorias = obtenerCategorias();
+  const estructuraHtml = categorias.reduce((acc, elemento) => {
+    return (
+      acc  +
+      ` 
+        <option>${elemento}</option>
+      `
+    );
+  }, ``);
+  selectCategoriasFiltros.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+};
+
+actualizarCategoriasDeCardFiltros();
+
 // BOTON AGREGAR CATEGORIA AL ABM
-botonAgregarCategoria.onclick = (e) => {
+botonAgregarCategoria.onclick = () => {
   const categoriaAgregada = inputAgregarCategoria.value;
   inputAgregarCategoria.value = "";
   categorias.push(categoriaAgregada);
-
-  agregarCategoriasAlABMDeCategorias();
+   
   const categoriasAJSON = JSON.stringify(categorias);
   localStorage.setItem("categorias", categoriasAJSON);
-  console.log(categoriasAJSON);
+
+  agregarCategoriasAlABMDeCategorias();
+  actualizarCategoriasDeCardFiltros();
+ 
 };
 
 //MOSTRAR OCULTAR CARD REPORTES
@@ -141,3 +160,4 @@ linkReportesNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
 };
+
