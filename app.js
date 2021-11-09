@@ -17,6 +17,7 @@ const botonAgregarOperacion = document.querySelector(
 const botonCancelarAgregarOperacion = document.querySelector(
   "#cancelar-agregar-operacion"
 );
+const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion")
 
 const sectionCardNuevaOperacion = document.querySelector(
   "#section-card-nueva-operacion"
@@ -125,7 +126,7 @@ agregarCategoriasAlABMDeCategorias();
 
 //ACTUALIZACION DE CATEGORIAS DE SELECT DE CARD FILTROS
 
-const actualizarCategoriasDeCardFiltros = () => {
+const actualizarCategoriasSelect = () => {
   const categorias = obtenerCategorias();
   const estructuraHtml = categorias.reduce((acc, elemento) => {
     return (
@@ -136,21 +137,23 @@ const actualizarCategoriasDeCardFiltros = () => {
     );
   }, ``);
   selectCategoriasFiltros.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  selectCategoriasNuevaOperacion.innerHTML =`<option>Todos</option> ${estructuraHtml}`;
 };
 
-actualizarCategoriasDeCardFiltros();
+actualizarCategoriasSelect();
 
 // BOTON AGREGAR CATEGORIA AL ABM
 botonAgregarCategoria.onclick = () => {
   const categoriaAgregada = inputAgregarCategoria.value;
   inputAgregarCategoria.value = "";
-  categorias.push(categoriaAgregada);
+  const categoriasActualizadas = obtenerCategorias()
+  categoriasActualizadas.push(categoriaAgregada);
    
-  const categoriasAJSON = JSON.stringify(categorias);
+  const categoriasAJSON = JSON.stringify(categoriasActualizadas);
   localStorage.setItem("categorias", categoriasAJSON);
 
   agregarCategoriasAlABMDeCategorias();
-  actualizarCategoriasDeCardFiltros();
+  actualizarCategoriasSelect();
  
 };
 
