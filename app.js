@@ -187,4 +187,4 @@ botonFormularioAgregarOperacion.onclick = (e) =>{
 
   console.log("hola")
   console.log(inputDescripcionNuevaOperacion.value);
-}
+};
