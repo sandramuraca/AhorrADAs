@@ -188,14 +188,14 @@
                                 <div class="field ml-6 mr-6">
                                     <label class="label">Descripción</label>
                                         <div class="control">
-                                            <input class="input my-1" type="text"> 
+                                            <input class="input my-1" id="input-descripcion-nueva-operacion" type="text"> 
                                         </div>
                                 </div>
         
                                 <div class="field ml-6 mr-6">
                                     <label class="label">Monto</label>
                                         <div class="control">
-                                            <input class="input my-1" ype="number"> 
+                                            <input class="input my-1" id="input-monto-nueva-operacion" ype="number"> 
                                         </div>
                                 </div>
         
@@ -203,7 +203,7 @@
                                     <label class="label">Tipo</label> 
                                         <div class="control">
                                              <div class="select is is-fullwidth">
-                                                <select class="select">
+                                                <select class="select" id="select-tipo-nueva-operacion">
                                                     <option>Todos</option>
                                                     <option>Gastos</option>
                                                     <option>Ganancias</option>
@@ -226,13 +226,13 @@
                                 <div class="field ml-6 mr-6">
                                     <label class="label">Desde</label> 
                                         <div class="control">
-                                            <input class="input my-1" type="date"> 
+                                            <input class="input my-1" type="date" id="input-fecha-nueva-operacion"> 
                                         </div>
                                 </div>
         
                                 <div class="buttons mt-6 mb-3">
-                                    <button class="button is-light" id="cancelar-agregar-operacion"> Cancelar </button>
-                                    <button class="button is-success"> Agregar </button>
+                                    <button class="button is-light" id="boton-cancelar-operacion"> Cancelar </button>
+                                    <button class="button is-success" id="boton-formulario-agregar-operacion"> Agregar </button>
                                 </div>
         
                             </form>
