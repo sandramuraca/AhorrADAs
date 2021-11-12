@@ -14,14 +14,22 @@ const cardNuevaOperacion = document.querySelector("#card-nueva-operacion");
 const botonAgregarOperacion = document.querySelector(
   "#boton-agregar-operacion"
 );
-const botonCancelarAgregarOperacion = document.querySelector(
-  "#cancelar-agregar-operacion"
+const botonCancelarOperacion = document.querySelector(
+  "#boton-cancelar-operacion"
 );
-const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion")
 
 const sectionCardNuevaOperacion = document.querySelector(
   "#section-card-nueva-operacion"
 );
+
+// TARER VARIABLES DECLARADAS EN NUEVA OPERACION A ESTA SECCION, Y SACAR COMENTARIOS
+// const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+// const inputMontoNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+// const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion");
+// const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+
+
 const sectionCardCategorias = document.querySelector(
   "#section-card-categorias"
 );
@@ -52,7 +60,7 @@ botonAgregarOperacion.onclick = () => {
   main.classList.add("is-hidden");
 };
 
-botonCancelarAgregarOperacion.onclick = () => {
+botonCancelarOperacion.onclick = () => {
   sectionCardNuevaOperacion.classList.add("is-hidden");
   main.classList.remove("is-hidden");
 };
@@ -164,3 +172,19 @@ linkReportesNav.onclick = () => {
   sectionCardCategorias.classList.add("is-hidden");
 };
 
+
+// AGREGAR NUEVA OPERACION
+const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+const inputMontoNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
+
+const operaciones = [];
+
+botonFormularioAgregarOperacion.onclick = (e) =>{
+  e.preventDefault();
+
+  console.log("hola")
+  console.log(inputDescripcionNuevaOperacion.value);
+};
