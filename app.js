@@ -12,9 +12,9 @@ const mostrarOcultarFiltros = document.querySelector(
   "#mostrar-ocultar-filtros"
 );
 const formularioFiltros = document.querySelector("#formulario-filtros");
-const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
-
-
+const selectCategoriasFiltros = document.querySelector(
+  "#select-categorias-filtros"
+);
 
 //NUEVA OPERACION
 const sectionCardNuevaOperacion = document.querySelector(
@@ -29,15 +29,29 @@ const botonCancelarOperacion = document.querySelector(
 );
 
 //FORMULARIO NUEVA OPERACION
-const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion");
-const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
-const inputMontoNuevaOperacion = document.querySelector("#input-monto-nueva-operacion");
-const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+const selectCategoriasNuevaOperacion = document.querySelector(
+  "#select-categorias-nueva-operacion"
+);
+const inputDescripcionNuevaOperacion = document.querySelector(
+  "#input-descripcion-nueva-operacion"
+);
+const inputMontoNuevaOperacion = document.querySelector(
+  "#input-monto-nueva-operacion"
+);
+const selectTipoNuevaOperacion = document.querySelector(
+  "#select-tipo-nueva-operacion"
+);
 
-const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
-const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
+const inputFechaNuevaOperacion = document.querySelector(
+  "#input-fecha-nueva-operacion"
+);
+const botonFormularioAgregarOperacion = document.querySelector(
+  "#boton-formulario-agregar-operacion"
+);
 
-const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-operaciones");
+const contenedorGrillaOperaciones = document.querySelector(
+  "#contenedor-grilla-operaciones"
+);
 
 ///CATEGORIAS
 const sectionCardCategorias = document.querySelector(
@@ -52,7 +66,6 @@ const botonAgregarCategoria = document.querySelector(
 const listadoCategorias = document.querySelector("#listado-categorias");
 
 const sectionCardReportes = document.querySelector("#section-card-reportes");
-
 
 //**********FUNCIONALIDADES: VER OCULTAR PANELES*************** */
 
@@ -156,14 +169,14 @@ const actualizarCategoriasSelect = () => {
   const categorias = obtenerCategorias();
   const estructuraHtml = categorias.reduce((acc, elemento) => {
     return (
-      acc  +
+      acc +
       ` 
         <option value=${elemento}>${elemento}</option>
       `
     );
   }, ``);
   selectCategoriasFiltros.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
-  selectCategoriasNuevaOperacion.innerHTML =`<option>Todos</option> ${estructuraHtml}`;
+  selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
 };
 
 actualizarCategoriasSelect();
@@ -172,39 +185,42 @@ actualizarCategoriasSelect();
 botonAgregarCategoria.onclick = () => {
   const categoriaAgregada = inputAgregarCategoria.value;
   inputAgregarCategoria.value = "";
-  const categoriasActualizadas = obtenerCategorias()
+  const categoriasActualizadas = obtenerCategorias();
   categoriasActualizadas.push(categoriaAgregada);
-   
+
   const categoriasAJSON = JSON.stringify(categoriasActualizadas);
   localStorage.setItem("categorias", categoriasAJSON);
 
   agregarCategoriasAlABMDeCategorias();
   actualizarCategoriasSelect();
- 
 };
 
-
 // AGREGAR NUEVA OPERACION
-const operaciones = [];
+let operaciones = [];
 
-const guardarEnLS = () =>{
+const guardarEnLS = () => {
   const operacionesAJSON = JSON.stringify(operaciones);
   localStorage.setItem("operaciones", operacionesAJSON);
-}
+};
 
-const recuperarDatosDeLS = () =>{
+const recuperarDatosDeLS = () => {
   const operacionesGuardadasEnLS = localStorage.getItem("operaciones");
   const operacionesDelLSaJS = JSON.parse(operacionesGuardadasEnLS);
-  //hay que hacer un if para verificar si ha bdatos guardados en local storage para que no pise los objetos del array que guarda en el LS
 
-  return operacionesDelLSaJS 
-}
+  if (operacionesGuardadasEnLS === null) {
+    return operaciones;
+  } else {
+    return operacionesDelLSaJS;
+  }
+};
+recuperarDatosDeLS();
 
-const mostrarOperacionesEnHTML = () =>{
-
-  const estructuraHTML =  operaciones.reduce((acc, elemento, index) => {
-      return acc +
-        `
+const mostrarOperacionesEnHTML = () => {
+  operaciones = recuperarDatosDeLS();
+  const estructuraHTML = operaciones.reduce((acc, elemento, index) => {
+    return (
+      acc +
+      `
           <div class="columns is-align-items-center">
             <div class="column is-3 has-text-weight-semibold">   
               <p>${elemento.descripcion}</p>
@@ -230,35 +246,37 @@ const mostrarOperacionesEnHTML = () =>{
             </div>
           </div>    
         `
-    }, ``);
+    );
+  }, ``);
 
-    contenedorGrillaOperaciones.innerHTML = estructuraHTML;
+  contenedorGrillaOperaciones.innerHTML = estructuraHTML;
 };
+mostrarOperacionesEnHTML();
 
 //hacer funcion auxiliar para mostrar las operaciones pusheadas al array en el HTML
-const contenedorImgTextoOperaciones = document.querySelector("#contenedor-img-y-textos-operaciones");
-const titulosGrillaOperaciones = document.querySelector("#titulos-grilla-operaciones");
+const contenedorImgTextoOperaciones = document.querySelector(
+  "#contenedor-img-y-textos-operaciones"
+);
+const titulosGrillaOperaciones = document.querySelector(
+  "#titulos-grilla-operaciones"
+);
 
-botonFormularioAgregarOperacion.onclick = (e) =>{
+botonFormularioAgregarOperacion.onclick = (e) => {
   e.preventDefault();
-  operacionesPusheadas = operaciones.push (
-    {descripcion: `${inputDescripcionNuevaOperacion.value}`,
-     monto: `${inputMontoNuevaOperacion.value}`,
-     tipo: `${selectTipoNuevaOperacion.value}`,
-     categoria : `${selectCategoriasNuevaOperacion.value}`,
-     fecha: `${inputFechaNuevaOperacion.value}`,
-    }
-  )
+  operacionesPusheadas = operaciones.push({
+    descripcion: `${inputDescripcionNuevaOperacion.value}`,
+    monto: `${inputMontoNuevaOperacion.value}`,
+    tipo: `${selectTipoNuevaOperacion.value}`,
+    categoria: `${selectCategoriasNuevaOperacion.value}`,
+    fecha: `${inputFechaNuevaOperacion.value}`,
+  });
 
   contenedorImgTextoOperaciones.classList.add("is-hidden");
   titulosGrillaOperaciones.classList.remove("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
   main.classList.remove("is-hidden");
 
-  guardarEnLS()
-  recuperarDatosDeLS()
-  mostrarOperacionesEnHTML()
+  guardarEnLS();
+  recuperarDatosDeLS();
+  mostrarOperacionesEnHTML();
 };
-
-
-
