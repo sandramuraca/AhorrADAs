@@ -189,7 +189,7 @@ const recuperarDatosDeLS = () =>{
   return operacionesDelLSaJS 
 }
 
-
+//hacer funcion auxiliar para mostrar las operaciones pusheadas al array en el HTML
  
 botonFormularioAgregarOperacion.onclick = (e) =>{
   e.preventDefault();
@@ -203,6 +203,7 @@ botonFormularioAgregarOperacion.onclick = (e) =>{
   )
   guardarEnLS()
   recuperarDatosDeLS()
+  //ejecutar las funcion para mostrar operaciones en el HTML
 };
 
 
