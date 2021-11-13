@@ -37,6 +37,7 @@ const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-oper
 const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
 const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
 
+const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-operaciones");
 
 ///CATEGORIAS
 const sectionCardCategorias = document.querySelector(
@@ -186,7 +187,6 @@ botonAgregarCategoria.onclick = () => {
 // AGREGAR NUEVA OPERACION
 const operaciones = [];
 
-
 const guardarEnLS = () =>{
   const operacionesAJSON = JSON.stringify(operaciones);
   localStorage.setItem("operaciones", operacionesAJSON);
@@ -194,13 +194,51 @@ const guardarEnLS = () =>{
 
 const recuperarDatosDeLS = () =>{
   const operacionesGuardadasEnLS = localStorage.getItem("operaciones");
-  const operacionesDelLSaJS = JSON.parse(operacionesGuardadasEnLS)
+  const operacionesDelLSaJS = JSON.parse(operacionesGuardadasEnLS);
   //hay que hacer un if para verificar si ha bdatos guardados en local storage para que no pise los objetos del array que guarda en el LS
+
   return operacionesDelLSaJS 
 }
 
+const mostrarOperacionesEnHTML = () =>{
+
+  const estructuraHTML =  operaciones.reduce((acc, elemento, index) => {
+      return acc +
+        `
+          <div class="columns is-align-items-center">
+            <div class="column is-3 has-text-weight-semibold">   
+              <p>${elemento.descripcion}</p>
+            </div>
+            
+            <div class="column is-3 ">   
+              <p class="tag">${elemento.categoria}<p>
+            </div>
+  
+            <div class="column is-2 has-text-right">
+              <p class="has-text-grey">${elemento.fecha}</p>
+            </div>
+  
+            <div class="column is-2 has-text-right is-align-items-center has-text-danger has-text-weight-bold ">
+              <p>$${elemento.monto}</p>
+            </div>
+               
+            <div class="column is-2 has-text-right">   
+              <p>
+                <button class="button is-ghost is-small boton-editar" id="boton-editar-${index}">Editar</button>
+                <button class="button is-ghost is-small boton-eliminar" id="boton-eliminar-${index}">Eliminar</button>
+              </p>
+            </div>
+          </div>    
+        `
+    }, ``);
+
+    contenedorGrillaOperaciones.innerHTML = estructuraHTML;
+};
+
 //hacer funcion auxiliar para mostrar las operaciones pusheadas al array en el HTML
- 
+const contenedorImgTextoOperaciones = document.querySelector("#contenedor-img-y-textos-operaciones");
+const titulosGrillaOperaciones = document.querySelector("#titulos-grilla-operaciones");
+
 botonFormularioAgregarOperacion.onclick = (e) =>{
   e.preventDefault();
   operacionesPusheadas = operaciones.push (
@@ -211,9 +249,15 @@ botonFormularioAgregarOperacion.onclick = (e) =>{
      fecha: `${inputFechaNuevaOperacion.value}`,
     }
   )
+
+  contenedorImgTextoOperaciones.classList.add("is-hidden");
+  titulosGrillaOperaciones.classList.remove("is-hidden");
+  sectionCardNuevaOperacion.classList.add("is-hidden");
+  main.classList.remove("is-hidden");
+
   guardarEnLS()
   recuperarDatosDeLS()
-  //ejecutar las funcion para mostrar operaciones en el HTML
+  mostrarOperacionesEnHTML()
 };
 
 
