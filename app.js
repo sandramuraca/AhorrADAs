@@ -184,7 +184,14 @@ const operaciones = [];
 
 botonFormularioAgregarOperacion.onclick = (e) =>{
   e.preventDefault();
-
+  
+  operacionesPusheadas = operaciones.push (
+    {descripcion: `${inputDescripcionNuevaOperacion.value}`,
+     monto: `${inputMontoNuevaOperacion.value}`,
+     tipo: `${selectTipoNuevaOperacion.value}`,
+     fecha: `${inputFechaNuevaOperacion.value}`,
+    }
+  )
   console.log("hola")
-  console.log(inputDescripcionNuevaOperacion.value);
+  console.log(operaciones);
 };
