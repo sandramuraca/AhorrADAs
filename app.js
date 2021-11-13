@@ -22,12 +22,15 @@ const sectionCardNuevaOperacion = document.querySelector(
   "#section-card-nueva-operacion"
 );
 
-// TARER VARIABLES DECLARADAS EN NUEVA OPERACION A ESTA SECCION, Y SACAR COMENTARIOS
-// const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
-// const inputMontoNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
-// const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+
 const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion");
-// const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+const inputMontoNuevaOperacion = document.querySelector("#input-monto-nueva-operacion");
+const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+
+const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
+
 
 
 const sectionCardCategorias = document.querySelector(
@@ -76,7 +79,13 @@ linkBalanceNav.onclick = () => {
   sectionCardReportes.classList.add("is-hidden");
   main.classList.remove("is-hidden");
 };
-
+//MOSTRAR OCULTAR CARD REPORTES
+linkReportesNav.onclick = () => {
+  sectionCardReportes.classList.remove("is-hidden");
+  main.classList.add("is-hidden");
+  sectionCardCategorias.classList.add("is-hidden");
+};
+///***************************************** */
 //ARRAY LISTADO CATEGORIAS POR DEFECTO
 const categorias = [
   "Comidas",
@@ -103,7 +112,6 @@ const obtenerCategorias = () => {
 };
 
 // FUNCION PARA MOSTRAR CATEGORIAS EN HTML
-
 const agregarCategoriasAlABMDeCategorias = () => {
   const categorias = obtenerCategorias();
   const estructuraHtml = categorias.reduce((acc, elemento) => {
@@ -133,14 +141,13 @@ const agregarCategoriasAlABMDeCategorias = () => {
 agregarCategoriasAlABMDeCategorias();
 
 //ACTUALIZACION DE CATEGORIAS DE SELECT DE CARD FILTROS
-
 const actualizarCategoriasSelect = () => {
   const categorias = obtenerCategorias();
   const estructuraHtml = categorias.reduce((acc, elemento) => {
     return (
       acc  +
       ` 
-        <option>${elemento}</option>
+        <option value=${elemento}>${elemento}</option>
       `
     );
   }, ``);
@@ -165,33 +172,38 @@ botonAgregarCategoria.onclick = () => {
  
 };
 
-//MOSTRAR OCULTAR CARD REPORTES
-linkReportesNav.onclick = () => {
-  sectionCardReportes.classList.remove("is-hidden");
-  main.classList.add("is-hidden");
-  sectionCardCategorias.classList.add("is-hidden");
-};
-
 
 // AGREGAR NUEVA OPERACION
-const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
-const inputMontoNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
-const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
-const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
-const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
-
 const operaciones = [];
 
+
+const guardarEnLS = () =>{
+  const operacionesAJSON = JSON.stringify(operaciones);
+  localStorage.setItem("operaciones", operacionesAJSON);
+}
+
+const recuperarDatosDeLS = () =>{
+  const operacionesGuardadasEnLS = localStorage.getItem("operaciones");
+  const operacionesDelLSaJS = JSON.parse(operacionesGuardadasEnLS)
+  //hay que hacer un if para verificar si ha bdatos guardados en local storage para que no pise los objetos del array que guarda en el LS
+  return operacionesDelLSaJS 
+}
+
+
+ 
 botonFormularioAgregarOperacion.onclick = (e) =>{
   e.preventDefault();
-  
   operacionesPusheadas = operaciones.push (
     {descripcion: `${inputDescripcionNuevaOperacion.value}`,
      monto: `${inputMontoNuevaOperacion.value}`,
      tipo: `${selectTipoNuevaOperacion.value}`,
+     categoria : `${selectCategoriasNuevaOperacion.value}`,
      fecha: `${inputFechaNuevaOperacion.value}`,
     }
   )
-  console.log("hola")
-  console.log(operaciones);
+  guardarEnLS()
+  recuperarDatosDeLS()
 };
+
+
+
