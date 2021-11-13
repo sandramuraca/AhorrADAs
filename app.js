@@ -1,15 +1,25 @@
+//********ELEMENTOS DEL DOM*************** */
+//MAIN
+const main = document.querySelector("#main");
+
+//BOTONES NAV
 const linkBalanceNav = document.querySelector("#link-balance");
 const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
+//DESPLEGABLE FILTROS
 const mostrarOcultarFiltros = document.querySelector(
   "#mostrar-ocultar-filtros"
 );
 const formularioFiltros = document.querySelector("#formulario-filtros");
 const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
 
-const main = document.querySelector("#main");
 
+
+//NUEVA OPERACION
+const sectionCardNuevaOperacion = document.querySelector(
+  "#section-card-nueva-operacion"
+);
 const cardNuevaOperacion = document.querySelector("#card-nueva-operacion");
 const botonAgregarOperacion = document.querySelector(
   "#boton-agregar-operacion"
@@ -18,11 +28,7 @@ const botonCancelarOperacion = document.querySelector(
   "#boton-cancelar-operacion"
 );
 
-const sectionCardNuevaOperacion = document.querySelector(
-  "#section-card-nueva-operacion"
-);
-
-
+//FORMULARIO NUEVA OPERACION
 const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion");
 const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
 const inputMontoNuevaOperacion = document.querySelector("#input-monto-nueva-operacion");
@@ -32,7 +38,7 @@ const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-oper
 const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
 
 
-
+///CATEGORIAS
 const sectionCardCategorias = document.querySelector(
   "#section-card-categorias"
 );
@@ -45,6 +51,9 @@ const botonAgregarCategoria = document.querySelector(
 const listadoCategorias = document.querySelector("#listado-categorias");
 
 const sectionCardReportes = document.querySelector("#section-card-reportes");
+
+
+//**********FUNCIONALIDADES: VER OCULTAR PANELES*************** */
 
 //MOSTRAR OCULTAR FILTROS - MENU IZQUIERDO
 mostrarOcultarFiltros.addEventListener("click", () => {
@@ -85,6 +94,7 @@ linkReportesNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
 };
+
 ///***************************************** */
 //ARRAY LISTADO CATEGORIAS POR DEFECTO
 const categorias = [
