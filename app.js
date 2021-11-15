@@ -76,7 +76,7 @@ mostrarOcultarFiltros.addEventListener("click", () => {
   if (mostrarOcultarFiltros.innerText == "Ocultar Filtros") {
     mostrarOcultarFiltros.innerText = "Mostrar Filtros";
   } else {
-    mostrarOcultarFiltros.innerText = "Mostrar Filtros";
+    mostrarOcultarFiltros.innerText = "Ocultar Filtros";
   }
 });
 
@@ -84,6 +84,8 @@ mostrarOcultarFiltros.addEventListener("click", () => {
 botonAgregarOperacion.onclick = () => {
   sectionCardNuevaOperacion.classList.remove("is-hidden");
   main.classList.add("is-hidden");
+  sectionCardReportes.classList.add("is-hidden");
+  sectionCardCategorias.classList.add("is-hidden");
 };
 
 botonCancelarOperacion.onclick = () => {
@@ -95,18 +97,23 @@ botonCancelarOperacion.onclick = () => {
 linkCategoriasNav.onclick = () => {
   sectionCardCategorias.classList.remove("is-hidden");
   main.classList.add("is-hidden");
+  sectionCardNuevaOperacion.classList.add("is-hidden");
+  sectionCardReportes.classList.add("is-hidden");
 };
 
 linkBalanceNav.onclick = () => {
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
   main.classList.remove("is-hidden");
+  sectionCardNuevaOperacion.classList.add("is-hidden");
 };
+
 //MOSTRAR OCULTAR CARD REPORTES
 linkReportesNav.onclick = () => {
   sectionCardReportes.classList.remove("is-hidden");
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
+  sectionCardNuevaOperacion.classList.add("is-hidden");
 };
 
 ///***************************************** */
