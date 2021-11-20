@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/5f812df695.js" crossorigin="anonymous"></script>
     <title>AhorrADAs</title>
 </head>
-<body>
+<body class=" has-background-light">
     <header>
         <!-- NAV BAR -->
         <nav class="navbar is-info has-shadow is-spaced" role="navigation" aria-label="main navigation">
@@ -210,18 +210,18 @@
                     <div class="box">
                         <h2 class="title is-size-2">Nueva Operación</h2>
         
-                            <form action="">
+                            <form id="form-nueva-operacion" action="">
                                 <div class="field ml-6 mr-6">
                                     <label class="label">Descripción</label>
                                         <div class="control">
-                                            <input class="input my-1" id="input-descripcion-nueva-operacion" type="text"> 
+                                            <input class="input my-1" id="input-descripcion-nueva-operacion" type="text" required> 
                                         </div>
                                 </div>
         
                                 <div class="field ml-6 mr-6">
                                     <label class="label">Monto</label>
                                         <div class="control">
-                                            <input class="input my-1" id="input-monto-nueva-operacion" ype="number"> 
+                                            <input class="input my-1" id="input-monto-nueva-operacion" type="number" min="1" max="10"> 
                                         </div>
                                 </div>
         
