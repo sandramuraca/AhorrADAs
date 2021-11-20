@@ -17,6 +17,7 @@ const selectCategoriasFiltros = document.querySelector(
 );
 
 //NUEVA OPERACION
+const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
 const sectionCardNuevaOperacion = document.querySelector(
   "#section-card-nueva-operacion"
 );
@@ -212,7 +213,19 @@ botonAgregarCategoria.onclick = () => {
 // AGREGAR NUEVA OPERACION
 let operaciones = [];
 
-const ocultarImagenSiHayCategorias = () =>{
+
+//funcion para que el color de monto cambie dependiendo si es gasto o ganancia
+
+const colorDeMontoOperaciones = (tipo) =>{
+  if(tipo === "Gastos"){
+    return "has-text-danger"
+  }else{
+    return "has-text-success"
+  }
+}
+//Funcion auxiliar para ocultar o mostrar imagen de Card Operaciones
+
+const ocultarImagenSiHayOperaciones = () =>{
   const toggleDeImagen = 
   contenedorImgTextoOperaciones.classList.add("is-hidden");
   titulosGrillaOperaciones.classList.remove("is-hidden");
@@ -234,7 +247,7 @@ const recuperarDatosDeLS = () => {
   if (operacionesGuardadasEnLS === null) {
     return operaciones;
   } else {
-    ocultarImagenSiHayCategorias();
+    ocultarImagenSiHayOperaciones();
     return operacionesDelLSaJS;
   }
 };
@@ -259,7 +272,7 @@ const mostrarOperacionesEnHTML = () => {
               <p class="has-text-grey">${elemento.fecha}</p>
             </div>
   
-            <div class="column is-2 has-text-right is-align-items-center has-text-danger has-text-weight-bold ">
+            <div class="column is-2 has-text-right is-align-items-center ${colorDeMontoOperaciones(elemento.tipo)} has-text-weight-bold">
               <p>$${elemento.monto}</p>
             </div>
                
@@ -278,9 +291,22 @@ const mostrarOperacionesEnHTML = () => {
 };
 mostrarOperacionesEnHTML();
 
-//hacer funcion auxiliar para mostrar las operaciones pusheadas al array en el HTML
 
-botonFormularioAgregarOperacion.onclick = (e) => {
+
+
+
+//Funcion auxiliar para limpiar los campos del form nueva
+// operacion cada vez que se ingresa una nueva
+const limpiarCamposDelFormOperacion = () =>{
+  inputDescripcionNuevaOperacion.value = "";
+  inputMontoNuevaOperacion.value = "";
+  selectTipoNuevaOperacion.value = "Todos";
+  selectCategoriasNuevaOperacion.value = "Todos";
+  inputFechaNuevaOperacion.value = "dd/mm/aaaa"
+}
+
+
+formularioCompletoNuevaOperacion.onsubmit = (e) => {
   e.preventDefault();
   operacionesPusheadas = operaciones.push({
     descripcion: `${inputDescripcionNuevaOperacion.value}`,
@@ -290,9 +316,10 @@ botonFormularioAgregarOperacion.onclick = (e) => {
     fecha: `${inputFechaNuevaOperacion.value}`,
   });
 
-  ocultarImagenSiHayCategorias();
-
+  ocultarImagenSiHayOperaciones();
   guardarEnLS();
   recuperarDatosDeLS();
   mostrarOperacionesEnHTML();
+  limpiarCamposDelFormOperacion();
 };
+
