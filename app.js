@@ -28,6 +28,13 @@ const botonCancelarOperacion = document.querySelector(
   "#boton-cancelar-operacion"
 );
 
+const contenedorImgTextoOperaciones = document.querySelector(
+  "#contenedor-img-y-textos-operaciones"
+);
+const titulosGrillaOperaciones = document.querySelector(
+  "#titulos-grilla-operaciones"
+);
+
 //FORMULARIO NUEVA OPERACION
 const selectCategoriasNuevaOperacion = document.querySelector(
   "#select-categorias-nueva-operacion"
@@ -205,6 +212,16 @@ botonAgregarCategoria.onclick = () => {
 // AGREGAR NUEVA OPERACION
 let operaciones = [];
 
+const ocultarImagenSiHayCategorias = () =>{
+  const toggleDeImagen = 
+  contenedorImgTextoOperaciones.classList.add("is-hidden");
+  titulosGrillaOperaciones.classList.remove("is-hidden");
+  sectionCardNuevaOperacion.classList.add("is-hidden");
+  main.classList.remove("is-hidden");
+
+  return toggleDeImagen;
+}
+
 const guardarEnLS = () => {
   const operacionesAJSON = JSON.stringify(operaciones);
   localStorage.setItem("operaciones", operacionesAJSON);
@@ -217,6 +234,7 @@ const recuperarDatosDeLS = () => {
   if (operacionesGuardadasEnLS === null) {
     return operaciones;
   } else {
+    ocultarImagenSiHayCategorias();
     return operacionesDelLSaJS;
   }
 };
@@ -261,12 +279,6 @@ const mostrarOperacionesEnHTML = () => {
 mostrarOperacionesEnHTML();
 
 //hacer funcion auxiliar para mostrar las operaciones pusheadas al array en el HTML
-const contenedorImgTextoOperaciones = document.querySelector(
-  "#contenedor-img-y-textos-operaciones"
-);
-const titulosGrillaOperaciones = document.querySelector(
-  "#titulos-grilla-operaciones"
-);
 
 botonFormularioAgregarOperacion.onclick = (e) => {
   e.preventDefault();
@@ -278,10 +290,7 @@ botonFormularioAgregarOperacion.onclick = (e) => {
     fecha: `${inputFechaNuevaOperacion.value}`,
   });
 
-  contenedorImgTextoOperaciones.classList.add("is-hidden");
-  titulosGrillaOperaciones.classList.remove("is-hidden");
-  sectionCardNuevaOperacion.classList.add("is-hidden");
-  main.classList.remove("is-hidden");
+  ocultarImagenSiHayCategorias();
 
   guardarEnLS();
   recuperarDatosDeLS();
