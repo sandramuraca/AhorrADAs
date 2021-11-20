@@ -1,4 +1,4 @@
-//********ELEMENTOS DEL DOM*************** */
+/**********ELEMENTOS DEL DOM**********/
 //MAIN
 const main = document.querySelector("#main");
 
@@ -8,74 +8,37 @@ const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
 //DESPLEGABLE FILTROS
-const mostrarOcultarFiltros = document.querySelector(
-  "#mostrar-ocultar-filtros"
-);
+const mostrarOcultarFiltros = document.querySelector("#mostrar-ocultar-filtros");
 const formularioFiltros = document.querySelector("#formulario-filtros");
-const selectCategoriasFiltros = document.querySelector(
-  "#select-categorias-filtros"
-);
+const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
 
 //NUEVA OPERACION
 const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
-const sectionCardNuevaOperacion = document.querySelector(
-  "#section-card-nueva-operacion"
-);
+const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion");
 const cardNuevaOperacion = document.querySelector("#card-nueva-operacion");
-const botonAgregarOperacion = document.querySelector(
-  "#boton-agregar-operacion"
-);
-const botonCancelarOperacion = document.querySelector(
-  "#boton-cancelar-operacion"
-);
-
-const contenedorImgTextoOperaciones = document.querySelector(
-  "#contenedor-img-y-textos-operaciones"
-);
-const titulosGrillaOperaciones = document.querySelector(
-  "#titulos-grilla-operaciones"
-);
+const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion");
+const botonCancelarOperacion = document.querySelector("#boton-cancelar-operacion");
+const contenedorImgTextoOperaciones = document.querySelector("#contenedor-img-y-textos-operaciones");
+const titulosGrillaOperaciones = document.querySelector("#titulos-grilla-operaciones");
 
 //FORMULARIO NUEVA OPERACION
-const selectCategoriasNuevaOperacion = document.querySelector(
-  "#select-categorias-nueva-operacion"
-);
-const inputDescripcionNuevaOperacion = document.querySelector(
-  "#input-descripcion-nueva-operacion"
-);
-const inputMontoNuevaOperacion = document.querySelector(
-  "#input-monto-nueva-operacion"
-);
-const selectTipoNuevaOperacion = document.querySelector(
-  "#select-tipo-nueva-operacion"
-);
-
-const inputFechaNuevaOperacion = document.querySelector(
-  "#input-fecha-nueva-operacion"
-);
-const botonFormularioAgregarOperacion = document.querySelector(
-  "#boton-formulario-agregar-operacion"
-);
-
-const contenedorGrillaOperaciones = document.querySelector(
-  "#contenedor-grilla-operaciones"
-);
+const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion");
+const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+const inputMontoNuevaOperacion = document.querySelector("#input-monto-nueva-operacion");
+const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
+const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-operaciones");
 
 ///CATEGORIAS
-const sectionCardCategorias = document.querySelector(
-  "#section-card-categorias"
-);
-const inputAgregarCategoria = document.querySelector(
-  "#input-agregar-categorias"
-);
-const botonAgregarCategoria = document.querySelector(
-  "#boton-agregar-categoria"
-);
+const sectionCardCategorias = document.querySelector("#section-card-categorias");
+const inputAgregarCategoria = document.querySelector("#input-agregar-categorias");
+const botonAgregarCategoria = document.querySelector("#boton-agregar-categoria");
 const listadoCategorias = document.querySelector("#listado-categorias");
 
 const sectionCardReportes = document.querySelector("#section-card-reportes");
 
-//**********FUNCIONALIDADES: VER OCULTAR PANELES*************** */
+/**************FUNCIONALIDADES: VER OCULTAR PANELES***************/
 
 //MOSTRAR OCULTAR FILTROS - MENU IZQUIERDO
 mostrarOcultarFiltros.addEventListener("click", () => {
@@ -109,6 +72,7 @@ linkCategoriasNav.onclick = () => {
   sectionCardReportes.classList.add("is-hidden");
 };
 
+//MOSTRAR OCULTAR CARD BALANCE
 linkBalanceNav.onclick = () => {
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
@@ -124,7 +88,7 @@ linkReportesNav.onclick = () => {
   sectionCardNuevaOperacion.classList.add("is-hidden");
 };
 
-///***************************************** */
+/******************************************/
 //ARRAY LISTADO CATEGORIAS POR DEFECTO
 const categorias = [
   "Comidas",
@@ -140,9 +104,7 @@ const categorias = [
 const obtenerCategorias = () => {
   const categoriasGuardadasEnElLocalStorage =
     localStorage.getItem("categorias");
-  const categoriasGuardadasJSONaJS = JSON.parse(
-    categoriasGuardadasEnElLocalStorage
-  );
+  const categoriasGuardadasJSONaJS = JSON.parse(categoriasGuardadasEnElLocalStorage);
   if (categoriasGuardadasEnElLocalStorage === null) {
     return categorias;
   } else {
@@ -213,18 +175,16 @@ botonAgregarCategoria.onclick = () => {
 // AGREGAR NUEVA OPERACION
 let operaciones = [];
 
-
-//funcion para que el color de monto cambie dependiendo si es gasto o ganancia
-
+// FUNCION PARA COLOR MONTO, SEGÚN SU TIPO
 const colorDeMontoOperaciones = (tipo) =>{
   if(tipo === "Gastos"){
     return "has-text-danger"
   }else{
     return "has-text-success"
   }
-}
-//Funcion auxiliar para ocultar o mostrar imagen de Card Operaciones
+};
 
+// FUNCION AUXILIAR PARA OCULTAR O MOSTRAR IMAGEN DE CARD OPERACIONES
 const ocultarImagenSiHayOperaciones = () =>{
   const toggleDeImagen = 
   contenedorImgTextoOperaciones.classList.add("is-hidden");
@@ -233,7 +193,16 @@ const ocultarImagenSiHayOperaciones = () =>{
   main.classList.remove("is-hidden");
 
   return toggleDeImagen;
-}
+};
+
+// FUNCION AUXILIAR PARA LIMPIAR CAMPOS DE FORM NUEVA OPERACION, CADA VEZ QUE SE INGRESA UNA NUEVA
+const limpiarCamposDelFormOperacion = () =>{
+  inputDescripcionNuevaOperacion.value = "";
+  inputMontoNuevaOperacion.value = "";
+  selectTipoNuevaOperacion.value = "Todos";
+  selectCategoriasNuevaOperacion.value = "Todos";
+  inputFechaNuevaOperacion.value = "dd/mm/aaaa"
+};
 
 const guardarEnLS = () => {
   const operacionesAJSON = JSON.stringify(operaciones);
@@ -253,6 +222,7 @@ const recuperarDatosDeLS = () => {
 };
 recuperarDatosDeLS();
 
+// FUNCION PARA MOSTRAR OPERACIONES EN HTML
 const mostrarOperacionesEnHTML = () => {
   operaciones = recuperarDatosDeLS();
   const estructuraHTML = operaciones.reduce((acc, elemento, index) => {
@@ -291,21 +261,7 @@ const mostrarOperacionesEnHTML = () => {
 };
 mostrarOperacionesEnHTML();
 
-
-
-
-
-//Funcion auxiliar para limpiar los campos del form nueva
-// operacion cada vez que se ingresa una nueva
-const limpiarCamposDelFormOperacion = () =>{
-  inputDescripcionNuevaOperacion.value = "";
-  inputMontoNuevaOperacion.value = "";
-  selectTipoNuevaOperacion.value = "Todos";
-  selectCategoriasNuevaOperacion.value = "Todos";
-  inputFechaNuevaOperacion.value = "dd/mm/aaaa"
-}
-
-
+// EVENTO PARA PUSHEAR NUEVAS OPERACIONES AL ARRAY
 formularioCompletoNuevaOperacion.onsubmit = (e) => {
   e.preventDefault();
   operacionesPusheadas = operaciones.push({
