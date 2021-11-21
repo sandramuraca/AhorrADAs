@@ -30,6 +30,9 @@ const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-oper
 const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
 const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-operaciones");
 
+//FOMULARIO EDITAR OPERACION
+const sectionCardEditarOperacion = document.querySelector("#section-card-editar-operacion");
+
 ///CATEGORIAS
 const sectionCardCategorias = document.querySelector("#section-card-categorias");
 const inputAgregarCategoria = document.querySelector("#input-agregar-categorias");
@@ -57,6 +60,7 @@ botonAgregarOperacion.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
 botonCancelarOperacion.onclick = () => {
@@ -70,6 +74,7 @@ linkCategoriasNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD BALANCE
@@ -78,6 +83,7 @@ linkBalanceNav.onclick = () => {
   sectionCardReportes.classList.add("is-hidden");
   main.classList.remove("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD REPORTES
@@ -86,6 +92,7 @@ linkReportesNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
 /******************************************/
@@ -261,8 +268,8 @@ const mostrarOperacionesEnHTML = () => {
   contenedorGrillaOperaciones.innerHTML = estructuraHTML;
 
   botonesEliminarOperacion();
+  botonesEditarOperacion();
 };
-
 
 // EVENTO PARA PUSHEAR NUEVAS OPERACIONES AL ARRAY
 formularioCompletoNuevaOperacion.onsubmit = (e) => {
@@ -282,7 +289,7 @@ formularioCompletoNuevaOperacion.onsubmit = (e) => {
   limpiarCamposDelFormOperacion();
 };
 
-// FUNCION ELIMINAR CATEGORIA
+// FUNCION ELIMINAR OPERACION
 const botonesEliminarOperacion = () =>{
   const botonEliminarOperacion = document.querySelectorAll(".boton-eliminar-operacion");
 
@@ -302,5 +309,26 @@ const botonesEliminarOperacion = () =>{
     };
   };
 };
+
+//FUNCION AUXILIAR PARA MOSTRAR CARD EDITAR OPERACION
+const mostrarCardEditarOperacion = () =>{
+  sectionCardEditarOperacion.classList.remove("is-hidden");
+  main.classList.add("is-hidden")
+};
+
+// FUNCION EDITAR OPERACION
+const botonesEditarOperacion = () =>{
+  const botonEditarOperacion = document.querySelectorAll(".boton-editar-operacion");
+
+  for (let i = 0; i < botonEditarOperacion.length; i++) {
+    botonEditarOperacion[i].onclick = () =>{
+      const idBotonEditar = botonEditarOperacion[i].id.slice(15);
+      idBotonEditarANumber = Number(idBotonEditar);
+
+      mostrarCardEditarOperacion()
+      
+    };
+  };
+}
 
 mostrarOperacionesEnHTML();

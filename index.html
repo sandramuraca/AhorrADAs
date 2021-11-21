@@ -270,6 +270,75 @@
                 
     </section>
     <!-- FIN NUEVA OPERACIÓN -->
+
+    <!-- VENTANA EDITAR OPERACIÓN -->
+    <section class="section is-hidden mt-4" id="section-card-editar-operacion">
+        <div class="container" id="card-editar-operacion">
+            <div class="columns is-multiline">
+                 <div class="column is-10 is-offset-1">
+                    <div class="box">
+                        <h2 class="title is-size-2">Editar Operación</h2>
+        
+                            <form id="form-editar-operacion" action="">
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Descripción</label>
+                                        <div class="control">
+                                            <input class="input my-1" id="input-descripcion-editar-operacion" type="text" required> 
+                                        </div>
+                                </div>
+        
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Monto</label>
+                                        <div class="control">
+                                            <input class="input my-1" id="input-monto-editar-operacion" type="number" min="1" max="10"> 
+                                        </div>
+                                </div>
+        
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Tipo</label> 
+                                        <div class="control">
+                                             <div class="select is is-fullwidth">
+                                                <select class="select" id="select-tipo-editar-operacion">
+                                                    <option>Todos</option>
+                                                    <option>Gastos</option>
+                                                    <option>Ganancias</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                </div>         
+        
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Categoría</label> 
+                                        <div class="control">
+                                            <div class="select is is-fullwidth">
+                                                <select class="select" id="select-categorias-editar-operacion">
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                </div>
+        
+                                <div class="field ml-6 mr-6">
+                                    <label class="label">Desde</label> 
+                                        <div class="control">
+                                            <input class="input my-1" type="date" id="input-fecha-editar-operacion"> 
+                                        </div>
+                                </div>
+        
+                                <div class="buttons mt-6 mb-3">
+                                    <button class="button is-light" id="boton-cancelar-editar-operacion"> Cancelar </button>
+                                    <button class="button is-success" id="boton-formulario-editar-operacion"> Editar </button>
+                                </div>
+        
+                            </form>
+        
+                            </div>
+                        </div>
+            </div>
+        </div>
+                
+    </section>
+    <!-- FIN EDITAR OPERACIÓN -->
     
     <!-- VENTANA CATEGORIAS -->
     <section class="section is-hidden mt-4" id="section-card-categorias">
