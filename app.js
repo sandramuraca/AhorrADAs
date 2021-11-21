@@ -155,7 +155,6 @@ const actualizarCategoriasSelect = () => {
   selectCategoriasFiltros.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
   selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
 };
-
 actualizarCategoriasSelect();
 
 // BOTON AGREGAR CATEGORIA AL ABM
@@ -172,7 +171,8 @@ botonAgregarCategoria.onclick = () => {
   actualizarCategoriasSelect();
 };
 
-// AGREGAR NUEVA OPERACION
+
+// ***********AGREGAR NUEVA OPERACION***********
 let operaciones = [];
 
 // FUNCION PARA COLOR MONTO, SEGÚN SU TIPO
@@ -215,7 +215,8 @@ const recuperarDatosDeLS = () => {
 
   if (operacionesGuardadasEnLS === null) {
     return operaciones;
-  } else {
+  } 
+  else {
     ocultarImagenSiHayOperaciones();
     return operacionesDelLSaJS;
   }
@@ -248,8 +249,8 @@ const mostrarOperacionesEnHTML = () => {
                
             <div class="column is-2 has-text-right">   
               <p>
-                <button class="button is-ghost is-small boton-editar" id="boton-editar-${index}">Editar</button>
-                <button class="button is-ghost is-small boton-eliminar" id="boton-eliminar-${index}">Eliminar</button>
+                <button class="button is-ghost is-small boton-editar-operacion" id="boton-editar-${index}">Editar</button>
+                <button class="button is-ghost is-small boton-eliminar-operacion" id="boton-eliminar-${index}">Eliminar</button>
               </p>
             </div>
           </div>    
@@ -258,8 +259,10 @@ const mostrarOperacionesEnHTML = () => {
   }, ``);
 
   contenedorGrillaOperaciones.innerHTML = estructuraHTML;
+
+  botonesEliminarOperacion();
 };
-mostrarOperacionesEnHTML();
+
 
 // EVENTO PARA PUSHEAR NUEVAS OPERACIONES AL ARRAY
 formularioCompletoNuevaOperacion.onsubmit = (e) => {
@@ -279,3 +282,25 @@ formularioCompletoNuevaOperacion.onsubmit = (e) => {
   limpiarCamposDelFormOperacion();
 };
 
+// FUNCION ELIMINAR CATEGORIA
+const botonesEliminarOperacion = () =>{
+  const botonEliminarOperacion = document.querySelectorAll(".boton-eliminar-operacion");
+
+  for (let i = 0; i < botonEliminarOperacion.length; i++) {
+    botonEliminarOperacion[i].onclick = () =>{
+      const idBotonEliminar = botonEliminarOperacion[i].id.slice(15);
+      idBotonEliminarANumber = Number(idBotonEliminar);
+      
+      const arrayOperacionesFiltrado = operaciones.filter((elemento, index) =>{
+        return index !== idBotonEliminarANumber;
+      });
+
+      operaciones = arrayOperacionesFiltrado;
+      guardarEnLS();
+      recuperarDatosDeLS();
+      mostrarOperacionesEnHTML(arrayOperacionesFiltrado);
+    };
+  };
+};
+
+mostrarOperacionesEnHTML();
