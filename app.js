@@ -159,7 +159,7 @@ const actualizarCategoriasSelect = () => {
       `
     );
   }, ``);
-  selectCategoriasFiltros.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
   selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
 };
 actualizarCategoriasSelect();
@@ -333,19 +333,61 @@ const botonesEditarOperacion = () =>{
 
 mostrarOperacionesEnHTML();
 
+
+
 //FILTRO POR TIPO - CATEGORIA - FECHA - ORDEN
 const selectTipoFiltros = document.querySelector("#select-tipo-filtros")
-const optionFiltroTodos = document.querySelector("#option-filtro-todos")
-const optionFiltroGasto = document.querySelector("#option-filtro-gasto")
-const optionFiltroGanancia = document.querySelector("#option-filtro-ganancias")
 //selectCategoriasFiltros --> select de categorias en filtros
 
 
-selectTipoFiltros.onchange = () => {
 
+selectTipoFiltros.onchange = () => {
+  if (selectTipoFiltros.value === "Todos"){
+    return operaciones
+  }  
   const filtradoPorTipo = operaciones.filter((operacion) =>{
     return operacion.tipo === selectTipoFiltros.value
   })
+
+  // agregar funcion para mostrar en html
+const mostrarOperacionesFiltradasEnHTML = () => {
+    const estructuraHTML = filtradoPorTipo.reduce((acc, elemento, index) => {
+    return (
+      acc +
+      `
+          <div class="columns is-align-items-center">
+            <div class="column is-3 has-text-weight-semibold">   
+              <p>${elemento.descripcion}</p>
+            </div>
+            
+            <div class="column is-3 ">   
+              <p class="tag">${elemento.categoria}<p>
+            </div>
   
-  console.log(filtradoPorTipo)
+            <div class="column is-2 has-text-right">
+              <p class="has-text-grey">${elemento.fecha}</p>
+            </div>
+  
+            <div class="column is-2 has-text-right is-align-items-center ${colorDeMontoOperaciones(elemento.tipo)} has-text-weight-bold">
+              <p>$${elemento.monto}</p>
+            </div>
+               
+            <div class="column is-2 has-text-right">   
+              <p>
+                <button class="button is-ghost is-small boton-editar-operacion" id="boton-editar-${index}">Editar</button>
+                <button class="button is-ghost is-small boton-eliminar-operacion" id="boton-eliminar-${index}">Eliminar</button>
+              </p>
+            </div>
+          </div>    
+        `
+    );
+  }, ``);
+
+  contenedorGrillaOperaciones.innerHTML = estructuraHTML;
+
+  botonesEliminarOperacion();
+  botonesEditarOperacion();
+};
+
+mostrarOperacionesFiltradasEnHTML()
 }
