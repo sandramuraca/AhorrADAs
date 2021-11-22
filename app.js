@@ -1,4 +1,4 @@
-//********ELEMENTOS DEL DOM*************** */
+/**********ELEMENTOS DEL DOM**********/
 //MAIN
 const main = document.querySelector("#main");
 
@@ -8,74 +8,40 @@ const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
 //DESPLEGABLE FILTROS
-const mostrarOcultarFiltros = document.querySelector(
-  "#mostrar-ocultar-filtros"
-);
+const mostrarOcultarFiltros = document.querySelector("#mostrar-ocultar-filtros");
 const formularioFiltros = document.querySelector("#formulario-filtros");
-const selectCategoriasFiltros = document.querySelector(
-  "#select-categorias-filtros"
-);
+const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
 
 //NUEVA OPERACION
 const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
-const sectionCardNuevaOperacion = document.querySelector(
-  "#section-card-nueva-operacion"
-);
+const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion");
 const cardNuevaOperacion = document.querySelector("#card-nueva-operacion");
-const botonAgregarOperacion = document.querySelector(
-  "#boton-agregar-operacion"
-);
-const botonCancelarOperacion = document.querySelector(
-  "#boton-cancelar-operacion"
-);
-
-const contenedorImgTextoOperaciones = document.querySelector(
-  "#contenedor-img-y-textos-operaciones"
-);
-const titulosGrillaOperaciones = document.querySelector(
-  "#titulos-grilla-operaciones"
-);
+const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion");
+const botonCancelarOperacion = document.querySelector("#boton-cancelar-operacion");
+const contenedorImgTextoOperaciones = document.querySelector("#contenedor-img-y-textos-operaciones");
+const titulosGrillaOperaciones = document.querySelector("#titulos-grilla-operaciones");
 
 //FORMULARIO NUEVA OPERACION
-const selectCategoriasNuevaOperacion = document.querySelector(
-  "#select-categorias-nueva-operacion"
-);
-const inputDescripcionNuevaOperacion = document.querySelector(
-  "#input-descripcion-nueva-operacion"
-);
-const inputMontoNuevaOperacion = document.querySelector(
-  "#input-monto-nueva-operacion"
-);
-const selectTipoNuevaOperacion = document.querySelector(
-  "#select-tipo-nueva-operacion"
-);
+const selectCategoriasNuevaOperacion = document.querySelector("#select-categorias-nueva-operacion");
+const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcion-nueva-operacion");
+const inputMontoNuevaOperacion = document.querySelector("#input-monto-nueva-operacion");
+const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
+const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
+const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-operaciones");
 
-const inputFechaNuevaOperacion = document.querySelector(
-  "#input-fecha-nueva-operacion"
-);
-const botonFormularioAgregarOperacion = document.querySelector(
-  "#boton-formulario-agregar-operacion"
-);
-
-const contenedorGrillaOperaciones = document.querySelector(
-  "#contenedor-grilla-operaciones"
-);
+//FOMULARIO EDITAR OPERACION
+const sectionCardEditarOperacion = document.querySelector("#section-card-editar-operacion");
 
 ///CATEGORIAS
-const sectionCardCategorias = document.querySelector(
-  "#section-card-categorias"
-);
-const inputAgregarCategoria = document.querySelector(
-  "#input-agregar-categorias"
-);
-const botonAgregarCategoria = document.querySelector(
-  "#boton-agregar-categoria"
-);
+const sectionCardCategorias = document.querySelector("#section-card-categorias");
+const inputAgregarCategoria = document.querySelector("#input-agregar-categorias");
+const botonAgregarCategoria = document.querySelector("#boton-agregar-categoria");
 const listadoCategorias = document.querySelector("#listado-categorias");
 
 const sectionCardReportes = document.querySelector("#section-card-reportes");
 
-//**********FUNCIONALIDADES: VER OCULTAR PANELES*************** */
+/**************FUNCIONALIDADES: VER OCULTAR PANELES***************/
 
 //MOSTRAR OCULTAR FILTROS - MENU IZQUIERDO
 mostrarOcultarFiltros.addEventListener("click", () => {
@@ -94,6 +60,7 @@ botonAgregarOperacion.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
 botonCancelarOperacion.onclick = () => {
@@ -107,13 +74,16 @@ linkCategoriasNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
+//MOSTRAR OCULTAR CARD BALANCE
 linkBalanceNav.onclick = () => {
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
   main.classList.remove("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD REPORTES
@@ -122,9 +92,10 @@ linkReportesNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
+  sectionCardEditarOperacion.add("is-hidden");
 };
 
-///***************************************** */
+/******************************************/
 //ARRAY LISTADO CATEGORIAS POR DEFECTO
 const categorias = [
   "Comidas",
@@ -140,9 +111,7 @@ const categorias = [
 const obtenerCategorias = () => {
   const categoriasGuardadasEnElLocalStorage =
     localStorage.getItem("categorias");
-  const categoriasGuardadasJSONaJS = JSON.parse(
-    categoriasGuardadasEnElLocalStorage
-  );
+  const categoriasGuardadasJSONaJS = JSON.parse(categoriasGuardadasEnElLocalStorage);
   if (categoriasGuardadasEnElLocalStorage === null) {
     return categorias;
   } else {
@@ -193,7 +162,6 @@ const actualizarCategoriasSelect = () => {
   selectCategoriasFiltros.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
   selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
 };
-
 actualizarCategoriasSelect();
 
 // BOTON AGREGAR CATEGORIA AL ABM
@@ -210,21 +178,20 @@ botonAgregarCategoria.onclick = () => {
   actualizarCategoriasSelect();
 };
 
-// AGREGAR NUEVA OPERACION
+
+// ***********AGREGAR NUEVA OPERACION***********
 let operaciones = [];
 
-
-//funcion para que el color de monto cambie dependiendo si es gasto o ganancia
-
+// FUNCION PARA COLOR MONTO, SEGÚN SU TIPO
 const colorDeMontoOperaciones = (tipo) =>{
   if(tipo === "Gastos"){
     return "has-text-danger"
   }else{
     return "has-text-success"
   }
-}
-//Funcion auxiliar para ocultar o mostrar imagen de Card Operaciones
+};
 
+// FUNCION AUXILIAR PARA OCULTAR O MOSTRAR IMAGEN DE CARD OPERACIONES
 const ocultarImagenSiHayOperaciones = () =>{
   const toggleDeImagen = 
   contenedorImgTextoOperaciones.classList.add("is-hidden");
@@ -233,7 +200,16 @@ const ocultarImagenSiHayOperaciones = () =>{
   main.classList.remove("is-hidden");
 
   return toggleDeImagen;
-}
+};
+
+// FUNCION AUXILIAR PARA LIMPIAR CAMPOS DE FORM NUEVA OPERACION, CADA VEZ QUE SE INGRESA UNA NUEVA
+const limpiarCamposDelFormOperacion = () =>{
+  inputDescripcionNuevaOperacion.value = "";
+  inputMontoNuevaOperacion.value = "";
+  selectTipoNuevaOperacion.value = "Todos";
+  selectCategoriasNuevaOperacion.value = "Todos";
+  inputFechaNuevaOperacion.value = "dd/mm/aaaa"
+};
 
 const guardarEnLS = () => {
   const operacionesAJSON = JSON.stringify(operaciones);
@@ -246,13 +222,15 @@ const recuperarDatosDeLS = () => {
 
   if (operacionesGuardadasEnLS === null) {
     return operaciones;
-  } else {
+  } 
+  else {
     ocultarImagenSiHayOperaciones();
     return operacionesDelLSaJS;
   }
 };
 recuperarDatosDeLS();
 
+// FUNCION PARA MOSTRAR OPERACIONES EN HTML
 const mostrarOperacionesEnHTML = () => {
   operaciones = recuperarDatosDeLS();
   const estructuraHTML = operaciones.reduce((acc, elemento, index) => {
@@ -278,8 +256,8 @@ const mostrarOperacionesEnHTML = () => {
                
             <div class="column is-2 has-text-right">   
               <p>
-                <button class="button is-ghost is-small boton-editar" id="boton-editar-${index}">Editar</button>
-                <button class="button is-ghost is-small boton-eliminar" id="boton-eliminar-${index}">Eliminar</button>
+                <button class="button is-ghost is-small boton-editar-operacion" id="boton-editar-${index}">Editar</button>
+                <button class="button is-ghost is-small boton-eliminar-operacion" id="boton-eliminar-${index}">Eliminar</button>
               </p>
             </div>
           </div>    
@@ -288,24 +266,12 @@ const mostrarOperacionesEnHTML = () => {
   }, ``);
 
   contenedorGrillaOperaciones.innerHTML = estructuraHTML;
+
+  botonesEliminarOperacion();
+  botonesEditarOperacion();
 };
-mostrarOperacionesEnHTML();
 
-
-
-
-
-//Funcion auxiliar para limpiar los campos del form nueva
-// operacion cada vez que se ingresa una nueva
-const limpiarCamposDelFormOperacion = () =>{
-  inputDescripcionNuevaOperacion.value = "";
-  inputMontoNuevaOperacion.value = "";
-  selectTipoNuevaOperacion.value = "Todos";
-  selectCategoriasNuevaOperacion.value = "Todos";
-  inputFechaNuevaOperacion.value = "dd/mm/aaaa"
-}
-
-
+// EVENTO PARA PUSHEAR NUEVAS OPERACIONES AL ARRAY
 formularioCompletoNuevaOperacion.onsubmit = (e) => {
   e.preventDefault();
   operacionesPusheadas = operaciones.push({
@@ -323,3 +289,46 @@ formularioCompletoNuevaOperacion.onsubmit = (e) => {
   limpiarCamposDelFormOperacion();
 };
 
+// FUNCION ELIMINAR OPERACION
+const botonesEliminarOperacion = () =>{
+  const botonEliminarOperacion = document.querySelectorAll(".boton-eliminar-operacion");
+
+  for (let i = 0; i < botonEliminarOperacion.length; i++) {
+    botonEliminarOperacion[i].onclick = () =>{
+      const idBotonEliminar = botonEliminarOperacion[i].id.slice(15);
+      idBotonEliminarANumber = Number(idBotonEliminar);
+      
+      const arrayOperacionesFiltrado = operaciones.filter((elemento, index) =>{
+        return index !== idBotonEliminarANumber;
+      });
+
+      operaciones = arrayOperacionesFiltrado;
+      guardarEnLS();
+      recuperarDatosDeLS();
+      mostrarOperacionesEnHTML(arrayOperacionesFiltrado);
+    };
+  };
+};
+
+//FUNCION AUXILIAR PARA MOSTRAR CARD EDITAR OPERACION
+const mostrarCardEditarOperacion = () =>{
+  sectionCardEditarOperacion.classList.remove("is-hidden");
+  main.classList.add("is-hidden")
+};
+
+// FUNCION EDITAR OPERACION
+const botonesEditarOperacion = () =>{
+  const botonEditarOperacion = document.querySelectorAll(".boton-editar-operacion");
+
+  for (let i = 0; i < botonEditarOperacion.length; i++) {
+    botonEditarOperacion[i].onclick = () =>{
+      const idBotonEditar = botonEditarOperacion[i].id.slice(15);
+      idBotonEditarANumber = Number(idBotonEditar);
+
+      mostrarCardEditarOperacion()
+      
+    };
+  };
+}
+
+mostrarOperacionesEnHTML();
