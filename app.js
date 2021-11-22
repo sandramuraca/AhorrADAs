@@ -332,3 +332,20 @@ const botonesEditarOperacion = () =>{
 }
 
 mostrarOperacionesEnHTML();
+
+//FILTRO POR TIPO - CATEGORIA - FECHA - ORDEN
+const selectTipoFiltros = document.querySelector("#select-tipo-filtros")
+const optionFiltroTodos = document.querySelector("#option-filtro-todos")
+const optionFiltroGasto = document.querySelector("#option-filtro-gasto")
+const optionFiltroGanancia = document.querySelector("#option-filtro-ganancias")
+//selectCategoriasFiltros --> select de categorias en filtros
+
+
+selectTipoFiltros.onchange = () => {
+
+  const filtradoPorTipo = operaciones.filter((operacion) =>{
+    return operacion.tipo === selectTipoFiltros.value
+  })
+  
+  console.log(filtradoPorTipo)
+}
