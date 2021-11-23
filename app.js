@@ -7,6 +7,14 @@ const linkBalanceNav = document.querySelector("#link-balance");
 const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
+//Mobile Menu (Zuri)
+const burgerIcon = document.querySelector("#burger")
+const navBarMenu = document.querySelector("#nav-links")
+
+burgerIcon.addEventListener("click", () =>{
+  navBarMenu.classList.toggle("is-active")
+})
+
 //DESPLEGABLE FILTROS
 const mostrarOcultarFiltros = document.querySelector(
   "#mostrar-ocultar-filtros"
