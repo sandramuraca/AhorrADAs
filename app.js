@@ -342,10 +342,10 @@ mostrarOperacionesEnHTML();
 const operacionesFiltradas = [...operaciones]
 
 selectTipoFiltros.onchange = () => {
-  if (selectTipoFiltros.value === "Todos"){
-    return operacionesFiltradas
-  }  
   const filtradoPorTipo = operacionesFiltradas.filter((operacion) =>{
+    if (selectTipoFiltros.value === "Todos"){
+      return operacion
+    }  
     return operacion.tipo === selectTipoFiltros.value
   })
 
@@ -388,17 +388,17 @@ const mostrarOperacionesFiltradasEnHTML = () => {
   botonesEditarOperacion();
 };
 
-//operacionesFiltradas = [... filtradoPorTipo]
 mostrarOperacionesFiltradasEnHTML()
 }
 
 
 //select de categorias en filtros
 selectCategoriasFiltros.onchange = () => {
-  if (selectCategoriasFiltros.value === "Todos"){
-    return operacionesFiltradas
-  }  
+ 
   const filtradoPorCategoria = operacionesFiltradas.filter((operacion) =>{
+    if (selectCategoriasFiltros.value === "Todos"){
+      return operacion
+    }  
     return operacion.categoria === selectCategoriasFiltros.value
   })
 
