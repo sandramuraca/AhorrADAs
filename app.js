@@ -313,9 +313,97 @@ const botonesEliminarOperacion = () =>{
 };
 
 //FUNCION AUXILIAR PARA MOSTRAR CARD EDITAR OPERACION
-const mostrarCardEditarOperacion = () =>{
+const mostrarCardEditarOperacion = (id) =>{
   sectionCardEditarOperacion.classList.remove("is-hidden");
-  main.classList.add("is-hidden")
+  main.classList.add("is-hidden");
+
+  const containerEditarOperacion = document.querySelector(".container-editar-operacion");
+  const objeto = {...operaciones[id]};
+
+  const crearFormEditarOperacion = `
+  <form id="form-editar-operacion" action="">
+    <div class="field ml-6 mr-6">
+    <label class="label">Descripción</label>
+        <div class="control">
+            <input class="input my-1" value="${objeto.descripcion}" id="input-descripcion-editar-operacion" type="text" required> 
+        </div>
+    </div>
+
+    <div class="field ml-6 mr-6">
+      <label class="label">Monto</label>
+          <div class="control">
+              <input class="input my-1" value="${objeto.monto}" id="input-monto-editar-operacion" type="number" min="1" max="10"> 
+          </div>
+    </div>
+
+    <div class="field ml-6 mr-6">
+      <label class="label">Tipo</label> 
+          <div class="control">
+              <div class="select is is-fullwidth">
+                  <select class="select" value="${objeto.tipo}" id="select-tipo-editar-operacion">
+                      <option>Todos</option>
+                      <option>Gastos</option>
+                      <option>Ganancias</option>
+                      </select>
+              </div>
+          </div>
+    </div>         
+
+    <div class="field ml-6 mr-6">
+      <label class="label">Categoría</label> 
+          <div class="control">
+              <div class="select is is-fullwidth">
+                  <select class="select" value="${objeto.categoria}" id="select-categorias-editar-operacion">
+                      
+                  </select>
+              </div>
+          </div>
+    </div>
+
+    <div class="field ml-6 mr-6">
+      <label class="label">Fecha</label> 
+          <div class="control">
+              <input class="input my-1" value="${objeto.categoria}" type="date" id="input-fecha-editar-operacion"> 
+          </div>
+    </div>
+
+    <div class="buttons mt-6 mb-3">
+      <button class="button is-light" id="boton-cancelar-editar-operacion"> Cancelar </button>
+      <input type="submit" class="button is-success" value="Editar" id="boton-formulario-editar-operacion"> 
+    </div>
+        
+  </form>`;
+
+  containerEditarOperacion.innerHTML = crearFormEditarOperacion;
+
+  // console.log(crearFormEditarOperacion)
+  console.log(containerEditarOperacion)
+
+  const formEditarOperacion = document.querySelector("#form-editar-operacion");
+  const inputDescripcionEditarOperacion = document.querySelector("#input-descripcion-editar-operacion");
+  const inputMontoEditarOperacion = document.querySelector("#input-monto-editar-operacion");
+  const selectTipoEditarOperacion = document.querySelector("#select-tipo-editar-operacion");
+  const selectCategoriasEditarOperacion = document.querySelector("#select-categorias-editar-operacion");
+  const inputFechaEditarOperacion = document.querySelector("#input-fecha-editar-operacion");
+  const botonCancelarEditarOperacion = document.querySelector("#boton-cancelar-editar-operacion");
+  const botonFormularioEditarOperacion = document.querySelector("#boton-formulario-editar-operacion");
+
+  formEditarOperacion.onsubmit = (e) =>{
+    e.preventDefault();
+    const nuevaDescripcion = inputDescripcionEditarOperacion.value;
+    const nuevoMonto = Number(inputMontoEditarOperacion.value);
+    const nuevoTipo = selectTipoEditarOperacion.value ;
+    const nuevaCategoria = selectCategoriasEditarOperacion.value;
+
+    objeto.descripcion = nuevaDescripcion;
+    objeto.monto = nuevoMonto;
+    objeto.tipo = nuevoTipo;
+    objeto.categoria = nuevaCategoria;
+    
+    guardarEnLS();
+    recuperarDatosDeLS();
+    mostrarOperacionesEnHTML();
+  }
 };
 
 // FUNCION EDITAR OPERACION
@@ -324,10 +412,10 @@ const botonesEditarOperacion = () =>{
 
   for (let i = 0; i < botonEditarOperacion.length; i++) {
     botonEditarOperacion[i].onclick = () =>{
-      const idBotonEditar = botonEditarOperacion[i].id.slice(15);
+      const idBotonEditar = botonEditarOperacion[i].id.slice(13);
       idBotonEditarANumber = Number(idBotonEditar);
 
-      mostrarCardEditarOperacion()
+      mostrarCardEditarOperacion(idBotonEditarANumber);
       
     };
   };
