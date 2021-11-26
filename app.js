@@ -348,8 +348,9 @@ selectTipoFiltros.onchange = () => {
     }  
     return operacion.tipo === selectTipoFiltros.value
   })
-
-const mostrarOperacionesFiltradasEnHTML = () => {
+  
+   const mostrarOperacionesFiltradasEnHTML = () => {
+    operaciones = recuperarDatosDeLS();
     const estructuraHTML = filtradoPorTipo.reduce((acc, elemento, index) => {
     return (
       acc +
@@ -403,6 +404,7 @@ selectCategoriasFiltros.onchange = () => {
   })
 
 const mostrarOperacionesFiltradasEnHTML = () => {
+    operaciones = recuperarDatosDeLS();
     const estructuraHTML = filtradoPorCategoria.reduce((acc, elemento, index) => {
     return (
       acc +
