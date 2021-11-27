@@ -13,7 +13,6 @@ const formularioFiltros = document.querySelector("#formulario-filtros");
 const selectTipoFiltros = document.querySelector("#select-tipo-filtros")
 const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
 
-
 //NUEVA OPERACION
 const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
 const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion");
@@ -34,6 +33,13 @@ const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-o
 
 //FOMULARIO EDITAR OPERACION
 const sectionCardEditarOperacion = document.querySelector("#section-card-editar-operacion");
+const formEditarOperacion = document.querySelector("#form-editar-operacion");
+const inputDescripcionEditarOperacion = document.querySelector("#input-descripcion-editar-operacion");
+const inputMontoEditarOperacion = document.querySelector("#input-monto-editar-operacion");
+const selectTipoEditarOperacion = document.querySelector("#select-tipo-editar-operacion");
+const selectCategoriasEditarOperacion = document.querySelector("#select-categorias-editar-operacion");
+const inputFechaEditarOperacion = document.querySelector("#input-fecha-editar-operacion");
+const botonCancelarEditarOperacion = document.querySelector("#boton-cancelar-editar-operacion");
 
 ///CATEGORIAS
 const sectionCardCategorias = document.querySelector("#section-card-categorias");
@@ -62,7 +68,7 @@ botonAgregarOperacion.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 botonCancelarOperacion.onclick = () => {
@@ -76,7 +82,7 @@ linkCategoriasNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD BALANCE
@@ -85,7 +91,7 @@ linkBalanceNav.onclick = () => {
   sectionCardReportes.classList.add("is-hidden");
   main.classList.remove("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD REPORTES
@@ -94,7 +100,7 @@ linkReportesNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 /******************************************/
@@ -161,14 +167,13 @@ const actualizarCategoriasSelect = () => {
       `
     );
   }, ``);
-  return estructuraHtml;
-  // selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
-  // selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
-  // selectCategoriasEditarOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+
+  selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
+  selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  selectCategoriasEditarOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
 };
-// actualizarCategoriasSelect();
-selectCategoriasNuevaOperacion.innerHTML = actualizarCategoriasSelect();
-selectCategoriasFiltros.innerHTML = actualizarCategoriasSelect();
+actualizarCategoriasSelect();
+
 
 // BOTON AGREGAR CATEGORIA AL ABM
 botonAgregarCategoria.onclick = () => {
@@ -181,8 +186,7 @@ botonAgregarCategoria.onclick = () => {
   localStorage.setItem("categorias", categoriasAJSON);
 
   agregarCategoriasAlABMDeCategorias();
-  selectCategoriasNuevaOperacion.innerHTML = actualizarCategoriasSelect();
-  selectCategoriasFiltros.innerHTML = actualizarCategoriasSelect();
+  actualizarCategoriasSelect();
 };
 
 
@@ -322,106 +326,39 @@ const mostrarCardEditarOperacion = (id) =>{
   sectionCardEditarOperacion.classList.remove("is-hidden");
   main.classList.add("is-hidden");
 
-  const containerEditarOperacion = document.querySelector(".container-editar-operacion");
-
   const objeto = operaciones[id];
+  console.log(objeto.tipo)
 
-  const crearFormEditarOperacion = `
-  <form id="form-editar-operacion" action="">
-    <div class="field ml-6 mr-6">
-    <label class="label">Descripción</label>
-        <div class="control">
-            <input class="input my-1" value="${objeto.descripcion}" id="input-descripcion-editar-operacion" type="text" required> 
-        </div>
-    </div>
-
-    <div class="field ml-6 mr-6">
-      <label class="label">Monto</label>
-          <div class="control">
-              <input class="input my-1" value="${objeto.monto}" id="input-monto-editar-operacion" type="number" min="1" max="1000000"> 
-          </div>
-    </div>
-
-    <div class="field ml-6 mr-6">
-      <label class="label">Tipo</label> 
-          <div class="control">
-              <div class="select is is-fullwidth">
-                  <select class="select" value="${objeto.tipo}" id="select-tipo-editar-operacion">
-                      <option>Todos</option>
-                      <option>Gastos</option>
-                      <option>Ganancias</option>
-                      </select>
-              </div>
-          </div>
-    </div>         
-
-    <div class="field ml-6 mr-6">
-      <label class="label">Categoría</label> 
-          <div class="control">
-              <div class="select is is-fullwidth">
-                  <select class="select" id="select-categorias-editar-operacion">
-                      
-                  </select>
-              </div>
-          </div>
-    </div>
-
-    <div class="field ml-6 mr-6">
-      <label class="label">Fecha</label> 
-          <div class="control">
-              <input class="input my-1" value="${objeto.fecha}" type="date" id="input-fecha-editar-operacion"> 
-          </div>
-    </div>
-
-    <div class="buttons mt-6 mb-3">
-      <button class="button is-light" id="boton-cancelar-editar-operacion"> Cancelar </button>
-      <input type="submit" class="button is-success" value="Editar" id="boton-formulario-editar-operacion"> 
-    </div>
-        
-  </form>`;
-
-  containerEditarOperacion.innerHTML = crearFormEditarOperacion;
-
-  // agregarCategoriasAlABMDeCategorias();
-  // actualizarCategoriasSelect();
-  
-  const inputDescripcionEditarOperacion = document.querySelector("#input-descripcion-editar-operacion");
-  const inputMontoEditarOperacion = document.querySelector("#input-monto-editar-operacion");
-  const selectTipoEditarOperacion = document.querySelector("#select-tipo-editar-operacion");
-  const selectCategoriasEditarOperacion = document.querySelector("#select-categorias-editar-operacion");
-  const inputFechaEditarOperacion = document.querySelector("#input-fecha-editar-operacion");
-  const botonCancelarEditarOperacion = document.querySelector("#boton-cancelar-editar-operacion");
-
-  selectCategoriasEditarOperacion.innerHTML = actualizarCategoriasSelect();
+  inputDescripcionEditarOperacion.value = objeto.descripcion;
+  inputMontoEditarOperacion.value = objeto.monto;
+  selectTipoEditarOperacion.value = objeto.tipo;
   selectCategoriasEditarOperacion.value = objeto.categoria;
+  inputFechaEditarOperacion.value = objeto.fecha;
 
   // botonCancelarEditarOperacion.onclick = () =>{
   //   sectionCardEditarOperacion.classList.add("is-hidden");
   // }
-  
-  const formEditarOperacion = document.querySelector("#form-editar-operacion");
 
   formEditarOperacion.onsubmit = (e) =>{
     e.preventDefault();
     sectionCardEditarOperacion.classList.add("is-hidden");
 
-    const nuevaDescripcion = inputDescripcionEditarOperacion.value;
-    const nuevoMonto = Number(inputMontoEditarOperacion.value);
-    const nuevoTipo = selectTipoEditarOperacion.value ;
-    const nuevaCategoria = selectCategoriasEditarOperacion.value;
-    const nuevaFecha = inputFechaEditarOperacion.value;
+    objeto.descripcion = inputDescripcionEditarOperacion.value;
+    objeto.monto = Number(inputMontoEditarOperacion.value);
+    objeto.tipo = selectTipoEditarOperacion.value ;
+    objeto.categoria = selectCategoriasEditarOperacion.value;
+    objeto.fecha = inputFechaEditarOperacion.value;
 
-    objeto.descripcion = nuevaDescripcion;
-    objeto.monto = nuevoMonto;
-    objeto.tipo = nuevoTipo;
-    objeto.categoria = nuevaCategoria;
-    objeto.fecha = nuevaFecha;
+    // objeto.descripcion = nuevaDescripcion;
+    // objeto.monto = nuevoMonto;
+    // objeto.tipo = nuevoTipo;
+    // objeto.categoria = nuevaCategoria;
+    // objeto.fecha = nuevaFecha;
     
     guardarEnLS();
     recuperarDatosDeLS();
     mostrarOperacionesEnHTML();
   }
-
 };
 
 // FUNCION EDITAR OPERACION
