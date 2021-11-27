@@ -7,13 +7,16 @@ const linkBalanceNav = document.querySelector("#link-balance");
 const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
-//Mobile Menu (Zuri)
+//MENU CELU
 const burgerIcon = document.querySelector("#burger")
 const navBarMenu = document.querySelector("#nav-links")
+const navBarBurger = document.querySelector(".navbar-burger")
 
+// MENU HAMBURGUESA FUNCIONALIDAD
 burgerIcon.addEventListener("click", () =>{
   navBarMenu.classList.toggle("is-active")
-})
+  navBarBurger.classList.toggle("is-active")
+});
 
 //DESPLEGABLE FILTROS
 const mostrarOcultarFiltros = document.querySelector(
