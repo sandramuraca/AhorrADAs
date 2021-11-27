@@ -161,10 +161,14 @@ const actualizarCategoriasSelect = () => {
       `
     );
   }, ``);
-  selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
-  selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  return estructuraHtml;
+  // selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
+  // selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  // selectCategoriasEditarOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
 };
-actualizarCategoriasSelect();
+// actualizarCategoriasSelect();
+selectCategoriasNuevaOperacion.innerHTML = actualizarCategoriasSelect();
+selectCategoriasFiltros.innerHTML = actualizarCategoriasSelect();
 
 // BOTON AGREGAR CATEGORIA AL ABM
 botonAgregarCategoria.onclick = () => {
@@ -177,7 +181,8 @@ botonAgregarCategoria.onclick = () => {
   localStorage.setItem("categorias", categoriasAJSON);
 
   agregarCategoriasAlABMDeCategorias();
-  actualizarCategoriasSelect();
+  selectCategoriasNuevaOperacion.innerHTML = actualizarCategoriasSelect();
+  selectCategoriasFiltros.innerHTML = actualizarCategoriasSelect();
 };
 
 
@@ -333,7 +338,7 @@ const mostrarCardEditarOperacion = (id) =>{
     <div class="field ml-6 mr-6">
       <label class="label">Monto</label>
           <div class="control">
-              <input class="input my-1" value="${objeto.monto}" id="input-monto-editar-operacion" type="number" min="1" max="10"> 
+              <input class="input my-1" value="${objeto.monto}" id="input-monto-editar-operacion" type="number" min="1" max="1000000"> 
           </div>
     </div>
 
@@ -354,7 +359,7 @@ const mostrarCardEditarOperacion = (id) =>{
       <label class="label">Categoría</label> 
           <div class="control">
               <div class="select is is-fullwidth">
-                  <select class="select" value="${objeto.categoria}" id="select-categorias-editar-operacion">
+                  <select class="select" id="select-categorias-editar-operacion">
                       
                   </select>
               </div>
@@ -377,6 +382,8 @@ const mostrarCardEditarOperacion = (id) =>{
 
   containerEditarOperacion.innerHTML = crearFormEditarOperacion;
 
+  // agregarCategoriasAlABMDeCategorias();
+  // actualizarCategoriasSelect();
   
   const inputDescripcionEditarOperacion = document.querySelector("#input-descripcion-editar-operacion");
   const inputMontoEditarOperacion = document.querySelector("#input-monto-editar-operacion");
@@ -385,10 +392,13 @@ const mostrarCardEditarOperacion = (id) =>{
   const inputFechaEditarOperacion = document.querySelector("#input-fecha-editar-operacion");
   const botonCancelarEditarOperacion = document.querySelector("#boton-cancelar-editar-operacion");
 
-  botonCancelarEditarOperacion.onclick = () =>{
-    sectionCardEditarOperacion.classList.add("is-hidden");
-  }
+  selectCategoriasEditarOperacion.innerHTML = actualizarCategoriasSelect();
+  selectCategoriasEditarOperacion.value = objeto.categoria;
 
+  // botonCancelarEditarOperacion.onclick = () =>{
+  //   sectionCardEditarOperacion.classList.add("is-hidden");
+  // }
+  
   const formEditarOperacion = document.querySelector("#form-editar-operacion");
 
   formEditarOperacion.onsubmit = (e) =>{
@@ -410,10 +420,8 @@ const mostrarCardEditarOperacion = (id) =>{
     guardarEnLS();
     recuperarDatosDeLS();
     mostrarOperacionesEnHTML();
-  };
+  }
 
-  agregarCategoriasAlABMDeCategorias();
-  actualizarCategoriasSelect();
 };
 
 // FUNCION EDITAR OPERACION
