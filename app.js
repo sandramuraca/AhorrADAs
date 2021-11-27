@@ -457,7 +457,7 @@ inputFecha.oninput = () => {
   const fechaDesde = inputFecha.value
  
   const filtroPorFecha = operacionesFiltradas.filter((operacion) =>{
-    return operacion.fecha > fechaDesde
+    return new Date(operacion.fecha)  > new Date(fechaDesde)
   })
 
   const mostrarOperacionesFiltradasEnHTML = () => {
