@@ -7,11 +7,29 @@ const linkBalanceNav = document.querySelector("#link-balance");
 const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
+//MENU CELU
+const burgerIcon = document.querySelector("#burger")
+const navBarMenu = document.querySelector("#nav-links")
+const navBarBurger = document.querySelector(".navbar-burger")
+
+// MENU HAMBURGUESA FUNCIONALIDAD
+burgerIcon.addEventListener("click", () =>{
+  navBarMenu.classList.toggle("is-active")
+  navBarBurger.classList.toggle("is-active")
+});
+
 //DESPLEGABLE FILTROS
 const mostrarOcultarFiltros = document.querySelector("#mostrar-ocultar-filtros");
 const formularioFiltros = document.querySelector("#formulario-filtros");
 const selectTipoFiltros = document.querySelector("#select-tipo-filtros")
 const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
+
+
+//CARD BALANCE
+
+const totalGananciasCardBalance = document.querySelector("#total-ganancias-card-balance");
+const totalGastosCardBalance = document.querySelector("#total-gastos-card-balance");
+const balanceCardBalance = document.querySelector("#balance-card-balance");
 
 
 //NUEVA OPERACION
@@ -34,6 +52,13 @@ const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-o
 
 //FOMULARIO EDITAR OPERACION
 const sectionCardEditarOperacion = document.querySelector("#section-card-editar-operacion");
+const formEditarOperacion = document.querySelector("#form-editar-operacion");
+const inputDescripcionEditarOperacion = document.querySelector("#input-descripcion-editar-operacion");
+const inputMontoEditarOperacion = document.querySelector("#input-monto-editar-operacion");
+const selectTipoEditarOperacion = document.querySelector("#select-tipo-editar-operacion");
+const selectCategoriasEditarOperacion = document.querySelector("#select-categorias-editar-operacion");
+const inputFechaEditarOperacion = document.querySelector("#input-fecha-editar-operacion");
+const botonCancelarEditarOperacion = document.querySelector("#boton-cancelar-editar-operacion");
 
 ///CATEGORIAS
 const sectionCardCategorias = document.querySelector("#section-card-categorias");
@@ -62,7 +87,7 @@ botonAgregarOperacion.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 botonCancelarOperacion.onclick = () => {
@@ -76,7 +101,7 @@ linkCategoriasNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
   sectionCardReportes.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD BALANCE
@@ -85,7 +110,7 @@ linkBalanceNav.onclick = () => {
   sectionCardReportes.classList.add("is-hidden");
   main.classList.remove("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 //MOSTRAR OCULTAR CARD REPORTES
@@ -94,7 +119,7 @@ linkReportesNav.onclick = () => {
   main.classList.add("is-hidden");
   sectionCardCategorias.classList.add("is-hidden");
   sectionCardNuevaOperacion.classList.add("is-hidden");
-  sectionCardEditarOperacion.add("is-hidden");
+  sectionCardEditarOperacion.classList.add("is-hidden");
 };
 
 /******************************************/
@@ -161,10 +186,13 @@ const actualizarCategoriasSelect = () => {
       `
     );
   }, ``);
+
   selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
-  selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  selectCategoriasNuevaOperacion.innerHTML = `${estructuraHtml}`;
+  selectCategoriasEditarOperacion.innerHTML = `${estructuraHtml}`;
 };
 actualizarCategoriasSelect();
+
 
 // BOTON AGREGAR CATEGORIA AL ABM
 botonAgregarCategoria.onclick = () => {
@@ -313,9 +341,43 @@ const botonesEliminarOperacion = () =>{
 };
 
 //FUNCION AUXILIAR PARA MOSTRAR CARD EDITAR OPERACION
-const mostrarCardEditarOperacion = () =>{
+const mostrarCardEditarOperacion = (id) =>{
   sectionCardEditarOperacion.classList.remove("is-hidden");
-  main.classList.add("is-hidden")
+  main.classList.add("is-hidden");
+
+  const objeto = operaciones[id];
+  console.log(objeto.tipo)
+
+  inputDescripcionEditarOperacion.value = objeto.descripcion;
+  inputMontoEditarOperacion.value = objeto.monto;
+  selectTipoEditarOperacion.value = objeto.tipo;
+  selectCategoriasEditarOperacion.value = objeto.categoria;
+  inputFechaEditarOperacion.value = objeto.fecha;
+
+  // botonCancelarEditarOperacion.onclick = () =>{
+  //   sectionCardEditarOperacion.classList.add("is-hidden");
+  // }
+
+  formEditarOperacion.onsubmit = (e) =>{
+    e.preventDefault();
+    sectionCardEditarOperacion.classList.add("is-hidden");
+
+    objeto.descripcion = inputDescripcionEditarOperacion.value;
+    objeto.monto = Number(inputMontoEditarOperacion.value);
+    objeto.tipo = selectTipoEditarOperacion.value ;
+    objeto.categoria = selectCategoriasEditarOperacion.value;
+    objeto.fecha = inputFechaEditarOperacion.value;
+
+    // objeto.descripcion = nuevaDescripcion;
+    // objeto.monto = nuevoMonto;
+    // objeto.tipo = nuevoTipo;
+    // objeto.categoria = nuevaCategoria;
+    // objeto.fecha = nuevaFecha;
+    
+    guardarEnLS();
+    recuperarDatosDeLS();
+    mostrarOperacionesEnHTML();
+  }
 };
 
 // FUNCION EDITAR OPERACION
@@ -324,10 +386,10 @@ const botonesEditarOperacion = () =>{
 
   for (let i = 0; i < botonEditarOperacion.length; i++) {
     botonEditarOperacion[i].onclick = () =>{
-      const idBotonEditar = botonEditarOperacion[i].id.slice(15);
+      const idBotonEditar = botonEditarOperacion[i].id.slice(13);
       idBotonEditarANumber = Number(idBotonEditar);
 
-      mostrarCardEditarOperacion()
+      mostrarCardEditarOperacion(idBotonEditarANumber);
       
     };
   };
@@ -448,6 +510,7 @@ const mostrarOperacionesFiltradasEnHTML = () => {
 mostrarOperacionesFiltradasEnHTML()
 }
 
+
 //FILTRO FECHA
 const inputFecha = document.querySelector("#input-fecha")
 
@@ -501,4 +564,110 @@ inputFecha.oninput = () => {
 };
 
 mostrarOperacionesFiltradasEnHTML()
+=======
+/// CARD REPORTES BALANCE DE OPERACIONES
+
+//NO SALIO QUE VA HACER
+//separamos el array ccategorias
+const separarPorCategoria = () => {
+
+  let arrayOperacionPorCategoria = []
+  
+  categorias.map((categoria) => {
+    arrayOperacionPorCategoria.push([])
+    })
+
+  operaciones.map((operacion) => {
+    const indiceCategoria = categorias.indexOf(operacion.categoria)
+
+     arrayOperacionPorCategoria[indiceCategoria].push(operacion)
+  })
+   console.log(arrayOperacionPorCategoria);
+
+  
+    let sumaGastos = 0;
+    let sumaGanancias = 0;
+   for (let i = 0; i < arrayOperacionPorCategoria.length; i++) {
+     
+       for (let j = 0; j < arrayOperacionPorCategoria[i].length; j++) {
+       
+          if(arrayOperacionPorCategoria[i][j].tipo === "Gastos"){
+            sumaGastos = sumaGastos + Number(arrayOperacionPorCategoria[i][j].monto)
+          }else{
+            sumaGanancias = sumaGanancias + Number(arrayOperacionPorCategoria[i][j].monto)
+          }
+       
+       }
+   }
+    
+   const balancePorCategoria = sumaGanancias - sumaGastos;
+   console.log(sumaGastos);
+   console.log(sumaGanancias);
+   console.log(balancePorCategoria);
+   
+
+}
+
+
+
+separarPorCategoria();
+
+
+
+// CARD BALANCE
+
+
+const separarPorGasto = operaciones.filter((operacion) => {
+  return operacion.tipo === "Gastos";
+}) 
+console.log(separarPorGasto);
+const separarPorGanancia = operaciones.filter((operacion) => {
+  return operacion.tipo === "Ganancias";
+}) 
+console.log(separarPorGanancia);
+
+
+const sumaGastos = separarPorGasto.reduce((acc, curr) => {
+  console.log(curr.monto)
+  return acc + Number(curr.monto);
+ 
+}, 0)
+ 
+console.log(sumaGastos)
+
+const sumaGanancias = separarPorGanancia.reduce((acc, curr) => {
+  console.log(curr.monto)
+  return acc + Number(curr.monto);
+ 
+}, 0)
+console.log(sumaGanancias)
+
+const balanceCardBalancePrincipal = sumaGanancias - sumaGastos ;
+
+//CAMBIO DEL HTML DE CARD BALANCE
+const actualizarBalancePrincipal = () =>{
+totalGananciasCardBalance.innerHTML = sumaGanancias;
+totalGastosCardBalance.innerHTML = sumaGastos;
+balanceCardBalance.innerHTML = balanceCardBalancePrincipal;
+}
+actualizarBalancePrincipal()
+//cambio de color del total de balance 
+
+const cambioDeColorTotalBalance = () =>{
+  if(balanceCardBalancePrincipal >= 0){
+    
+    balanceCardBalance.classList.add("has-text-primary");
+  }else{
+    
+    balanceCardBalance.classList.add("has-text-danger");
+  }
+}
+cambioDeColorTotalBalance();
+
+//CATEGORIA CON MAYOR GANANCIA
+
+
+const categoriaConMasGanancia = () => {
+
+
 }
