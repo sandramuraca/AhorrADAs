@@ -188,8 +188,8 @@ const actualizarCategoriasSelect = () => {
   }, ``);
 
   selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
-  selectCategoriasNuevaOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
-  selectCategoriasEditarOperacion.innerHTML = `<option>Todos</option> ${estructuraHtml}`;
+  selectCategoriasNuevaOperacion.innerHTML = `${estructuraHtml}`;
+  selectCategoriasEditarOperacion.innerHTML = `${estructuraHtml}`;
 };
 actualizarCategoriasSelect();
 
@@ -510,30 +510,33 @@ mostrarOperacionesFiltradasEnHTML()
 
 /// CARD REPORTES BALANCE DE OPERACIONES
 //NI IDEA NO SALIO
+
+
 //separamos el array ccategorias
-// const separarPorCategoria = () => {
-// //esto crea un array en blanco por cada categoria
-//   let arrayOperacionPorCategoria = []
+const separarPorCategoria = () => {
+//esto crea un array en blanco por cada categoria
+  let arrayOperacionPorCategoria = []
   
-//    categorias.map((categoria) => {
-//     arrayOperacionPorCategoria.push([])
-//     })
+   categorias.map((categoria) => {
+    arrayOperacionPorCategoria.push([])
+    })
 
     
-
-// //-----------------------------
-// operaciones.map((operacion) => {
-
-//  const indiceCategoria = categorias.indexOf(operacion.categoria)
-//  console.log(indiceCategoria)
-//    arrayOperacionPorCategoria[indiceCategoria].push(operacion)
-   
-//   })
-
   
-// }
+//-----------------------------
+operaciones.map((operacion) => {
 
-// separarPorCategoria();
+ const indiceCategoria = categorias.indexOf(operacion.categoria)
+ console.log(operacion.categoria)
+ console.log(indiceCategoria)
+   arrayOperacionPorCategoria[indiceCategoria].push(operacion)
+   
+  })
+
+  console.log(arrayOperacionPorCategoria);
+}
+
+separarPorCategoria();
 
 
 // CARD BALANCE
@@ -570,10 +573,12 @@ const balanceCardBalancePrincipal = sumaGanancias - sumaGastos ;
 
 
 //CAMBIO DEL HTML DE CARD BALANCE
+const actualizarBalancePrincipal = () =>{
 totalGananciasCardBalance.innerHTML = sumaGanancias;
 totalGastosCardBalance.innerHTML = sumaGastos;
 balanceCardBalance.innerHTML = balanceCardBalancePrincipal;
-
+}
+actualizarBalancePrincipal()
 //cambio de color del total de balance 
 
 const cambioDeColorTotalBalance = () =>{
