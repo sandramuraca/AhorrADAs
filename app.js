@@ -7,11 +7,30 @@ const linkBalanceNav = document.querySelector("#link-balance");
 const linkCategoriasNav = document.querySelector("#link-categorias");
 const linkReportesNav = document.querySelector("#link-reportes");
 
+//MENU CELU
+const burgerIcon = document.querySelector("#burger")
+const navBarMenu = document.querySelector("#nav-links")
+const navBarBurger = document.querySelector(".navbar-burger")
+
+// MENU HAMBURGUESA FUNCIONALIDAD
+burgerIcon.addEventListener("click", () =>{
+  navBarMenu.classList.toggle("is-active")
+  navBarBurger.classList.toggle("is-active")
+});
+
 //DESPLEGABLE FILTROS
 const mostrarOcultarFiltros = document.querySelector("#mostrar-ocultar-filtros");
 const formularioFiltros = document.querySelector("#formulario-filtros");
 const selectTipoFiltros = document.querySelector("#select-tipo-filtros")
 const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
+
+
+//CARD BALANCE
+
+const totalGananciasCardBalance = document.querySelector("#total-ganancias-card-balance");
+const totalGastosCardBalance = document.querySelector("#total-gastos-card-balance");
+const balanceCardBalance = document.querySelector("#balance-card-balance");
+
 
 //NUEVA OPERACION
 const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
@@ -488,3 +507,82 @@ const mostrarOperacionesFiltradasEnHTML = () => {
 
 mostrarOperacionesFiltradasEnHTML()
 }
+
+/// CARD REPORTES BALANCE DE OPERACIONES
+//NI IDEA NO SALIO
+//separamos el array ccategorias
+// const separarPorCategoria = () => {
+// //esto crea un array en blanco por cada categoria
+//   let arrayOperacionPorCategoria = []
+  
+//    categorias.map((categoria) => {
+//     arrayOperacionPorCategoria.push([])
+//     })
+
+    
+
+// //-----------------------------
+// operaciones.map((operacion) => {
+
+//  const indiceCategoria = categorias.indexOf(operacion.categoria)
+//  console.log(indiceCategoria)
+//    arrayOperacionPorCategoria[indiceCategoria].push(operacion)
+   
+//   })
+
+  
+// }
+
+// separarPorCategoria();
+
+
+// CARD BALANCE
+
+console.log(operaciones)
+const separarPorGasto = operaciones.filter((operacion) => {
+  return operacion.tipo === "Gastos";
+}) 
+console.log(separarPorGasto);
+const separarPorGanancia = operaciones.filter((operacion) => {
+  return operacion.tipo === "Ganancias";
+}) 
+console.log(separarPorGanancia);
+
+
+const sumaGastos = separarPorGasto.reduce((acc, curr) => {
+  console.log(curr.monto)
+  return acc + Number(curr.monto);
+ 
+}, 0)
+ 
+console.log(sumaGastos)
+
+const sumaGanancias = separarPorGanancia.reduce((acc, curr) => {
+  console.log(curr.monto)
+  return acc + Number(curr.monto);
+ 
+}, 0)
+console.log(sumaGanancias)
+
+
+const balanceCardBalancePrincipal = sumaGanancias - sumaGastos ;
+
+
+
+//CAMBIO DEL HTML DE CARD BALANCE
+totalGananciasCardBalance.innerHTML = sumaGanancias;
+totalGastosCardBalance.innerHTML = sumaGastos;
+balanceCardBalance.innerHTML = balanceCardBalancePrincipal;
+
+//cambio de color del total de balance 
+
+const cambioDeColorTotalBalance = () =>{
+  if(balanceCardBalancePrincipal >= 0){
+    
+    balanceCardBalance.classList.add("has-text-primary");
+  }else{
+    
+    balanceCardBalance.classList.add("has-text-danger");
+  }
+}
+cambioDeColorTotalBalance();
