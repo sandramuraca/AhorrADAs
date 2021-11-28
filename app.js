@@ -509,39 +509,57 @@ mostrarOperacionesFiltradasEnHTML()
 }
 
 /// CARD REPORTES BALANCE DE OPERACIONES
-//NI IDEA NO SALIO
 
-
+//NO SALIO QUE VA HACER
 //separamos el array ccategorias
 const separarPorCategoria = () => {
-//esto crea un array en blanco por cada categoria
+
   let arrayOperacionPorCategoria = []
   
-   categorias.map((categoria) => {
+  categorias.map((categoria) => {
     arrayOperacionPorCategoria.push([])
     })
 
-    
-  
-//-----------------------------
-operaciones.map((operacion) => {
+  operaciones.map((operacion) => {
+    const indiceCategoria = categorias.indexOf(operacion.categoria)
 
- const indiceCategoria = categorias.indexOf(operacion.categoria)
- console.log(operacion.categoria)
- console.log(indiceCategoria)
-   arrayOperacionPorCategoria[indiceCategoria].push(operacion)
-   
+     arrayOperacionPorCategoria[indiceCategoria].push(operacion)
   })
+   console.log(arrayOperacionPorCategoria);
 
-  console.log(arrayOperacionPorCategoria);
+  
+    let sumaGastos = 0;
+    let sumaGanancias = 0;
+   for (let i = 0; i < arrayOperacionPorCategoria.length; i++) {
+     
+       for (let j = 0; j < arrayOperacionPorCategoria[i].length; j++) {
+       
+          if(arrayOperacionPorCategoria[i][j].tipo === "Gastos"){
+            sumaGastos = sumaGastos + Number(arrayOperacionPorCategoria[i][j].monto)
+          }else{
+            sumaGanancias = sumaGanancias + Number(arrayOperacionPorCategoria[i][j].monto)
+          }
+       
+       }
+   }
+    
+   const balancePorCategoria = sumaGanancias - sumaGastos;
+   console.log(sumaGastos);
+   console.log(sumaGanancias);
+   console.log(balancePorCategoria);
+   
+
 }
+
+
 
 separarPorCategoria();
 
 
+
 // CARD BALANCE
 
-console.log(operaciones)
+
 const separarPorGasto = operaciones.filter((operacion) => {
   return operacion.tipo === "Gastos";
 }) 
@@ -567,10 +585,7 @@ const sumaGanancias = separarPorGanancia.reduce((acc, curr) => {
 }, 0)
 console.log(sumaGanancias)
 
-
 const balanceCardBalancePrincipal = sumaGanancias - sumaGastos ;
-
-
 
 //CAMBIO DEL HTML DE CARD BALANCE
 const actualizarBalancePrincipal = () =>{
@@ -591,3 +606,10 @@ const cambioDeColorTotalBalance = () =>{
   }
 }
 cambioDeColorTotalBalance();
+
+//CATEGORIA CON MAYOR GANANCIA
+
+
+const categoriaConMasGanancia = () => {
+
+}
