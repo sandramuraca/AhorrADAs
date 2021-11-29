@@ -66,6 +66,12 @@ const listadoCategorias = document.querySelector("#listado-categorias");
 
 const sectionCardReportes = document.querySelector("#section-card-reportes");
 
+//CARD REPORTES
+const nombreCategoriaReportes = document.querySelector("#nombre-categoria-reportes");
+const totalGananciaReportes = document.querySelector("#total-ganancia-reportes");
+const totalGastoReportes = document.querySelector("#total-gasto-reportes");
+const balanceReportes = document.querySelector("#balance-reportes");
+
 /**************FUNCIONALIDADES: VER OCULTAR PANELES***************/
 
 //MOSTRAR OCULTAR FILTROS - MENU IZQUIERDO
@@ -553,8 +559,9 @@ mostrarOperacionesFiltradasEnHTML()
 
 /// CARD REPORTES BALANCE DE OPERACIONES
 
-//NO SALIO QUE VA HACER
+
 //separamos el array ccategorias
+
 const separarPorCategoria = () => {
 
   let arrayOperacionPorCategoria = [];
@@ -569,17 +576,24 @@ const separarPorCategoria = () => {
     arrayOperacionPorCategoria[indiceCategoria].push(operacion);
   });
   console.log(arrayOperacionPorCategoria);
-
+ 
   let sumaGastos = 0;
   let sumaGanancias = 0;
   for (let i = 0; i < arrayOperacionPorCategoria.length; i++) {
      for (let j = 0; j < arrayOperacionPorCategoria[i].length; j++) {
        if(arrayOperacionPorCategoria[i][j].tipo === "Gastos"){
           sumaGastos = sumaGastos + Number(arrayOperacionPorCategoria[i][j].monto)
+      
        }
        else{
           sumaGanancias = sumaGanancias + Number(arrayOperacionPorCategoria[i][j].monto)
        }
+       
+       nombreCategoriaReportes.innerHTML = arrayOperacionPorCategoria[i][j].categoria;
+       totalGananciaReportes.innerHTML = sumaGanancias;
+       totalGastoReportes.innerHTML = sumaGastos;
+       balanceReportes.innerHTML = sumaGanancias - sumaGastos;
+
      }
   }
     
