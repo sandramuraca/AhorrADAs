@@ -24,13 +24,11 @@ const formularioFiltros = document.querySelector("#formulario-filtros");
 const selectTipoFiltros = document.querySelector("#select-tipo-filtros")
 const selectCategoriasFiltros = document.querySelector("#select-categorias-filtros");
 
-
 //CARD BALANCE
 
 const totalGananciasCardBalance = document.querySelector("#total-ganancias-card-balance");
 const totalGastosCardBalance = document.querySelector("#total-gastos-card-balance");
 const balanceCardBalance = document.querySelector("#balance-card-balance");
-
 
 //NUEVA OPERACION
 const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
@@ -192,7 +190,6 @@ const actualizarCategoriasSelect = () => {
   selectCategoriasEditarOperacion.innerHTML = `${estructuraHtml}`;
 };
 actualizarCategoriasSelect();
-
 
 // BOTON AGREGAR CATEGORIA AL ABM
 botonAgregarCategoria.onclick = () => {
@@ -367,12 +364,6 @@ const mostrarCardEditarOperacion = (id) =>{
     objeto.tipo = selectTipoEditarOperacion.value ;
     objeto.categoria = selectCategoriasEditarOperacion.value;
     objeto.fecha = inputFechaEditarOperacion.value;
-
-    // objeto.descripcion = nuevaDescripcion;
-    // objeto.monto = nuevoMonto;
-    // objeto.tipo = nuevoTipo;
-    // objeto.categoria = nuevaCategoria;
-    // objeto.fecha = nuevaFecha;
     
     guardarEnLS();
     recuperarDatosDeLS();
@@ -393,15 +384,13 @@ const botonesEditarOperacion = () =>{
       
     };
   };
-}
-
+};
 mostrarOperacionesEnHTML();
 
 
-
 //FILTRO POR TIPO - CATEGORIA - FECHA - ORDEN
-//select por tipo en filtros
 
+// SELECT POR TIPO EN FILTROS
 selectTipoFiltros.onchange = () => {
   const operacionesFiltradas = [...operaciones]
   const filtradoPorTipo = operacionesFiltradas.filter((operacion) =>{
@@ -450,12 +439,10 @@ selectTipoFiltros.onchange = () => {
   botonesEliminarOperacion();
   botonesEditarOperacion();
 };
-
 mostrarOperacionesFiltradasEnHTML()
-}
+};
 
-
-//select de categorias en filtros
+//SELECT DE CATEGORIAS EN FILTROS
 selectCategoriasFiltros.onchange = () => {
     const operacionesFiltradas = [...operaciones]
     const filtradoPorCategoria = operacionesFiltradas.filter((operacion) =>{
@@ -467,7 +454,7 @@ selectCategoriasFiltros.onchange = () => {
     
   })
 
-const mostrarOperacionesFiltradasEnHTML = () => {
+  const mostrarOperacionesFiltradasEnHTML = () => {
     operaciones = recuperarDatosDeLS();
     const estructuraHTML = filtradoPorCategoria.reduce((acc, elemento, index) => {
     return (
@@ -506,10 +493,8 @@ const mostrarOperacionesFiltradasEnHTML = () => {
   botonesEliminarOperacion();
   botonesEditarOperacion();
 };
-
 mostrarOperacionesFiltradasEnHTML()
-}
-
+};
 
 //FILTRO FECHA
 const inputFecha = document.querySelector("#input-fecha")
@@ -562,112 +547,97 @@ inputFecha.oninput = () => {
   botonesEliminarOperacion();
   botonesEditarOperacion();
 };
-
 mostrarOperacionesFiltradasEnHTML()
-=======
+};
+
+
 /// CARD REPORTES BALANCE DE OPERACIONES
 
 //NO SALIO QUE VA HACER
 //separamos el array ccategorias
 const separarPorCategoria = () => {
 
-  let arrayOperacionPorCategoria = []
+  let arrayOperacionPorCategoria = [];
   
   categorias.map((categoria) => {
-    arrayOperacionPorCategoria.push([])
-    })
+    arrayOperacionPorCategoria.push([]);
+  });
 
   operaciones.map((operacion) => {
     const indiceCategoria = categorias.indexOf(operacion.categoria)
 
-     arrayOperacionPorCategoria[indiceCategoria].push(operacion)
-  })
-   console.log(arrayOperacionPorCategoria);
+    arrayOperacionPorCategoria[indiceCategoria].push(operacion);
+  });
+  console.log(arrayOperacionPorCategoria);
 
-  
-    let sumaGastos = 0;
-    let sumaGanancias = 0;
-   for (let i = 0; i < arrayOperacionPorCategoria.length; i++) {
-     
-       for (let j = 0; j < arrayOperacionPorCategoria[i].length; j++) {
-       
-          if(arrayOperacionPorCategoria[i][j].tipo === "Gastos"){
-            sumaGastos = sumaGastos + Number(arrayOperacionPorCategoria[i][j].monto)
-          }else{
-            sumaGanancias = sumaGanancias + Number(arrayOperacionPorCategoria[i][j].monto)
-          }
-       
+  let sumaGastos = 0;
+  let sumaGanancias = 0;
+  for (let i = 0; i < arrayOperacionPorCategoria.length; i++) {
+     for (let j = 0; j < arrayOperacionPorCategoria[i].length; j++) {
+       if(arrayOperacionPorCategoria[i][j].tipo === "Gastos"){
+          sumaGastos = sumaGastos + Number(arrayOperacionPorCategoria[i][j].monto)
        }
-   }
+       else{
+          sumaGanancias = sumaGanancias + Number(arrayOperacionPorCategoria[i][j].monto)
+       }
+     }
+  }
     
-   const balancePorCategoria = sumaGanancias - sumaGastos;
-   console.log(sumaGastos);
-   console.log(sumaGanancias);
-   console.log(balancePorCategoria);
-   
-
-}
-
-
-
+  const balancePorCategoria = sumaGanancias - sumaGastos;
+  console.log(sumaGastos);
+  console.log(sumaGanancias);
+  console.log(balancePorCategoria);
+};
 separarPorCategoria();
 
 
-
 // CARD BALANCE
-
-
 const separarPorGasto = operaciones.filter((operacion) => {
   return operacion.tipo === "Gastos";
-}) 
+}); 
 console.log(separarPorGasto);
+
 const separarPorGanancia = operaciones.filter((operacion) => {
   return operacion.tipo === "Ganancias";
-}) 
+}) ;
 console.log(separarPorGanancia);
 
-
 const sumaGastos = separarPorGasto.reduce((acc, curr) => {
-  console.log(curr.monto)
+  console.log(curr.monto);
   return acc + Number(curr.monto);
- 
-}, 0)
- 
-console.log(sumaGastos)
+}, 0);
+ console.log(sumaGastos);
 
 const sumaGanancias = separarPorGanancia.reduce((acc, curr) => {
   console.log(curr.monto)
   return acc + Number(curr.monto);
- 
-}, 0)
-console.log(sumaGanancias)
+}, 0);
+console.log(sumaGanancias);
 
 const balanceCardBalancePrincipal = sumaGanancias - sumaGastos ;
 
 //CAMBIO DEL HTML DE CARD BALANCE
 const actualizarBalancePrincipal = () =>{
-totalGananciasCardBalance.innerHTML = sumaGanancias;
-totalGastosCardBalance.innerHTML = sumaGastos;
-balanceCardBalance.innerHTML = balanceCardBalancePrincipal;
-}
-actualizarBalancePrincipal()
-//cambio de color del total de balance 
+  totalGananciasCardBalance.innerHTML = sumaGanancias;
+  totalGastosCardBalance.innerHTML = sumaGastos;
+  balanceCardBalance.innerHTML = balanceCardBalancePrincipal;
+};
+actualizarBalancePrincipal();
 
+//CAMBIO DE COLOR TOTAL BALANCE
 const cambioDeColorTotalBalance = () =>{
   if(balanceCardBalancePrincipal >= 0){
-    
     balanceCardBalance.classList.add("has-text-primary");
-  }else{
-    
+  }
+  else{
     balanceCardBalance.classList.add("has-text-danger");
   }
-}
+};
 cambioDeColorTotalBalance();
 
 //CATEGORIA CON MAYOR GANANCIA
 
+// const categoriaConMasGanancia = () => {
 
-const categoriaConMasGanancia = () => {
 
-
-}
+// }
