@@ -6,14 +6,15 @@ La propuesta consistió en crear una aplicación que permita llevar un registro 
 
 ## Website
 
-[Click aquí para ver la página]()
+[Click aquí para ver la página](https://sandramuraca.github.io/AhorrADAs/)
 
 ---
+
+![Image text](/imagen-proyecto.png)
 
 ## Funcionalidad
 
 - **Agregar, editar y eliminar operaciones**
-  ![Image text](/imagen-proyecto.png)
 - **Agregar, editar y eliminar categorías**
 - **Cada operación cuenta con:**
   - Descripción
@@ -49,7 +50,7 @@ La propuesta consistió en crear una aplicación que permita llevar un registro 
 - BULMA
 - GIT
 - GitHub
-- Deploy en NETLIFY
+- Deploy con GitHub pages: https://sandramuraca.github.io/AhorrADAs/
 
 ## Recursos:
 
