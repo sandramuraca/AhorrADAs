@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/5f812df695.js" crossorigin="anonymous"></script>
     <title>AhorrADAs</title>
 </head>
+<!-- Sean prolijas con los nombres de clases, no dejen espacios al principio o al final -->
 <body class=" has-background-light">
     <header>
         <!-- NAV BAR -->
@@ -52,6 +53,8 @@
 
     <main class="section mt-4" id="main">
         <!-- PANEL CENTRAL HOME - CONTENEDOR DE LAS 3 CARDS -->
+        <!-- Este div y el que le sigue se abren, pero nunca se cierran. 
+        Prestenle atencion al tabulado en la linea 204: las guia para saber cuando hay un elemento sin cerrar -->
         <div class="container">
         <div class="columns is-multiline">
         
@@ -209,7 +212,8 @@
                  <div class="column is-10 is-offset-1">
                     <div class="box">
                         <h2 class="title is-size-2">Nueva Operación</h2>
-        
+        <!-- Este form esta a la misma altura que el h2 - son hermanos
+        El tabulado aqui es incorrecto -->
                             <form id="form-nueva-operacion" action="">
                                 <div class="field ml-6 mr-6">
                                     <label class="label">Descripción</label>
@@ -261,7 +265,7 @@
                                 </div>
         
                             </form>
-        
+        <!-- El tabulado aqui es incorrecto, ya que este div contiene al form -->
                             </div>
                         </div>
             </div>
@@ -451,6 +455,7 @@
                         <div class="my-6 py-2">
                         <div class="px-6">
                             <figure class="image ml-6">
+                                <!-- Este id está repetido de la otra imagen! -->
                                 <img id="imgen-operaciones" src="./assets/img/undraw_pie_chart_re_bgs8.svg" alt="mujer-con-grafico-torta">
                             </figure>
                         </div>
