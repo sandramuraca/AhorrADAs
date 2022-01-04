@@ -13,6 +13,9 @@ const navBarMenu = document.querySelector("#nav-links")
 const navBarBurger = document.querySelector(".navbar-burger")
 
 // MENU HAMBURGUESA FUNCIONALIDAD
+
+// Esto no deberia estar aqui, es un manejador de eventos, deberia estar con el resto de las funciones. 
+// Atencion ademas al espaciado, sean mas prolijas: las funciones deben tener espacio entre la flecha y el {
 burgerIcon.addEventListener("click", () =>{
   navBarMenu.classList.toggle("is-active")
   navBarBurger.classList.toggle("is-active")
@@ -33,6 +36,7 @@ const balanceCardBalance = document.querySelector("#balance-card-balance");
 //NUEVA OPERACION
 const formularioCompletoNuevaOperacion = document.querySelector("#form-nueva-operacion");
 const sectionCardNuevaOperacion = document.querySelector("#section-card-nueva-operacion");
+// declaran esta variable pero nunca la usan
 const cardNuevaOperacion = document.querySelector("#card-nueva-operacion");
 const botonAgregarOperacion = document.querySelector("#boton-agregar-operacion");
 const botonCancelarOperacion = document.querySelector("#boton-cancelar-operacion");
@@ -45,6 +49,7 @@ const inputDescripcionNuevaOperacion = document.querySelector("#input-descripcio
 const inputMontoNuevaOperacion = document.querySelector("#input-monto-nueva-operacion");
 const selectTipoNuevaOperacion = document.querySelector("#select-tipo-nueva-operacion");
 const inputFechaNuevaOperacion = document.querySelector("#input-fecha-nueva-operacion");
+// declaran esta variable pero nunca la usan
 const botonFormularioAgregarOperacion = document.querySelector("#boton-formulario-agregar-operacion");
 const contenedorGrillaOperaciones = document.querySelector("#contenedor-grilla-operaciones");
 
@@ -56,6 +61,7 @@ const inputMontoEditarOperacion = document.querySelector("#input-monto-editar-op
 const selectTipoEditarOperacion = document.querySelector("#select-tipo-editar-operacion");
 const selectCategoriasEditarOperacion = document.querySelector("#select-categorias-editar-operacion");
 const inputFechaEditarOperacion = document.querySelector("#input-fecha-editar-operacion");
+// declaran esta variable pero nunca la usan
 const botonCancelarEditarOperacion = document.querySelector("#boton-cancelar-editar-operacion");
 
 ///CATEGORIAS
@@ -174,6 +180,7 @@ const agregarCategoriasAlABMDeCategorias = () => {
         </div>
       `
     );
+    // usen comillas simples, no backticks, cuando no van a interpolar variables: ""
   }, ``);
   listadoCategorias.innerHTML = estructuraHtml;
 };
@@ -189,12 +196,17 @@ const actualizarCategoriasSelect = () => {
         <option value=${elemento}>${elemento}</option>
       `
     );
+    // misma observacion aqui
   }, ``);
 
   selectCategoriasFiltros.innerHTML = `<option value="Todos">Todos</option> ${estructuraHtml}`;
   selectCategoriasNuevaOperacion.innerHTML = `${estructuraHtml}`;
   selectCategoriasEditarOperacion.innerHTML = `${estructuraHtml}`;
 };
+
+// Es dificil seguir el flujo de ejecucion del codigo si tienen las funciones auxiliares mezcladas 
+// con estas ejecuciones, que ocurren apenas carga la pagina
+// Pongan estas ejecuciones al final de todo
 actualizarCategoriasSelect();
 
 // BOTON AGREGAR CATEGORIA AL ABM
@@ -216,6 +228,15 @@ botonAgregarCategoria.onclick = () => {
 let operaciones = [];
 
 // FUNCION PARA COLOR MONTO, SEGÚN SU TIPO
+// Sean mas prolijas con los espaciados, esta funcion deberia estar asi:
+// const colorDeMontoOperaciones = (tipo) => {
+//   if (tipo === "Gastos") {
+//     return "has-text-danger"
+//   } else {
+//     return "has-text-success"
+//   }
+// };
+
 const colorDeMontoOperaciones = (tipo) =>{
   if(tipo === "Gastos"){
     return "has-text-danger"
@@ -225,6 +246,7 @@ const colorDeMontoOperaciones = (tipo) =>{
 };
 
 // FUNCION AUXILIAR PARA OCULTAR O MOSTRAR IMAGEN DE CARD OPERACIONES
+// el espaciado asi: () => {
 const ocultarImagenSiHayOperaciones = () =>{
   const toggleDeImagen = 
   contenedorImgTextoOperaciones.classList.add("is-hidden");
@@ -236,6 +258,7 @@ const ocultarImagenSiHayOperaciones = () =>{
 };
 
 // FUNCION AUXILIAR PARA LIMPIAR CAMPOS DE FORM NUEVA OPERACION, CADA VEZ QUE SE INGRESA UNA NUEVA
+// el espaciado asi: () => {
 const limpiarCamposDelFormOperacion = () =>{
   inputDescripcionNuevaOperacion.value = "";
   inputMontoNuevaOperacion.value = "";
@@ -296,6 +319,7 @@ const mostrarOperacionesEnHTML = () => {
           </div>    
         `
     );
+    // usen comillas simples aqui
   }, ``);
 
   contenedorGrillaOperaciones.innerHTML = estructuraHTML;
@@ -307,7 +331,15 @@ const mostrarOperacionesEnHTML = () => {
 // EVENTO PARA PUSHEAR NUEVAS OPERACIONES AL ARRAY
 formularioCompletoNuevaOperacion.onsubmit = (e) => {
   e.preventDefault();
+  // aqui falta un const!
   operacionesPusheadas = operaciones.push({
+    // no es necesario aqui usar backticks ni interpolacion: no estan agregando nada a estos valores
+    // deberia ir asi:
+    // descripcion: inputDescripcionNuevaOperacion.value,
+    // monto: inputMontoNuevaOperacion.value,
+    // tipo: selectTipoNuevaOperacion.value,
+    // categoria: selectCategoriasNuevaOperacion.value,
+    // fecha: inputFechaNuevaOperacion.value,
     descripcion: `${inputDescripcionNuevaOperacion.value}`,
     monto: `${inputMontoNuevaOperacion.value}`,
     tipo: `${selectTipoNuevaOperacion.value}`,
@@ -323,12 +355,14 @@ formularioCompletoNuevaOperacion.onsubmit = (e) => {
 };
 
 // FUNCION ELIMINAR OPERACION
+// el espaciado asi: () => {
 const botonesEliminarOperacion = () =>{
   const botonEliminarOperacion = document.querySelectorAll(".boton-eliminar-operacion");
 
   for (let i = 0; i < botonEliminarOperacion.length; i++) {
     botonEliminarOperacion[i].onclick = () =>{
       const idBotonEliminar = botonEliminarOperacion[i].id.slice(15);
+      // aqui falta un const!
       idBotonEliminarANumber = Number(idBotonEliminar);
       
       const arrayOperacionesFiltrado = operaciones.filter((elemento, index) =>{
@@ -344,11 +378,13 @@ const botonesEliminarOperacion = () =>{
 };
 
 //FUNCION AUXILIAR PARA MOSTRAR CARD EDITAR OPERACION
+// el espaciado asi: () => {
 const mostrarCardEditarOperacion = (id) =>{
   sectionCardEditarOperacion.classList.remove("is-hidden");
   main.classList.add("is-hidden");
 
   const objeto = operaciones[id];
+  // no dejen console log en una entrega
   console.log(objeto.tipo)
 
   inputDescripcionEditarOperacion.value = objeto.descripcion;
@@ -357,10 +393,12 @@ const mostrarCardEditarOperacion = (id) =>{
   selectCategoriasEditarOperacion.value = objeto.categoria;
   inputFechaEditarOperacion.value = objeto.fecha;
 
+  // no dejen codigo comentado en una entrega
   // botonCancelarEditarOperacion.onclick = () =>{
   //   sectionCardEditarOperacion.classList.add("is-hidden");
   // }
 
+  // el espaciado asi: () => {
   formEditarOperacion.onsubmit = (e) =>{
     e.preventDefault();
     sectionCardEditarOperacion.classList.add("is-hidden");
@@ -384,6 +422,7 @@ const botonesEditarOperacion = () =>{
   for (let i = 0; i < botonEditarOperacion.length; i++) {
     botonEditarOperacion[i].onclick = () =>{
       const idBotonEditar = botonEditarOperacion[i].id.slice(13);
+      // aqui falta un const!
       idBotonEditarANumber = Number(idBotonEditar);
 
       mostrarCardEditarOperacion(idBotonEditarANumber);
@@ -396,6 +435,18 @@ mostrarOperacionesEnHTML();
 
 //FILTRO POR TIPO - CATEGORIA - FECHA - ORDEN
 
+
+// Cada uno de estos filtros funciona por separado - no saben lo que tienen seleccionados los demas
+// Si selecciono "filtrar por tipo gasto" voy a ver todos los gastos
+// Pero si despues seleccciono "filtar por categoria comida" voy a ver todas las categorias comidas, gastos y operaciones, 
+// a pesar de que tengo seleccionado "gasto" en tipo
+// Los filtros deben trabajar todos juntos. Como vimos en clase, deben estar todos subsumidos en una unica funcion
+
+// Necesitamos una funcion que se llame aplicarFiltros, por ejemplo. Cuando llamamos a selectTipoFiltros.onchange, 
+// selectCategoriasFiltros.onchange e inputFecha.oninput, lo que hacemos es ejecutar siempre la misma funcion. 
+// Esa funcion va a ir leyendo cada uno de los valores de los input y aplicando eso. 
+
+// Lo vimos en la clase 70. Por favor repansenla y si algo no esta claro, escribanme. Es importante que entiendan esta logica. 
 // SELECT POR TIPO EN FILTROS
 selectTipoFiltros.onchange = () => {
   const operacionesFiltradas = [...operaciones]
@@ -498,6 +549,7 @@ selectCategoriasFiltros.onchange = () => {
 
   botonesEliminarOperacion();
   botonesEditarOperacion();
+  // Corrijan el tabulado aqui:
 };
 mostrarOperacionesFiltradasEnHTML()
 };
@@ -552,6 +604,7 @@ inputFecha.oninput = () => {
 
   botonesEliminarOperacion();
   botonesEditarOperacion();
+  // corrijan el tabulado aqui
 };
 mostrarOperacionesFiltradasEnHTML()
 };
@@ -559,9 +612,16 @@ mostrarOperacionesFiltradasEnHTML()
 
 /// CARD REPORTES BALANCE DE OPERACIONES
 
+// No dejen console log!
 
 //separamos el array ccategorias
 
+// Esta funcion se llama "separarPorCategoria" pero no hace lo que dice. Lo que hace es mucho mas que 
+// separar por categoria: completa la seccion balance para que tenga los datos de las operaciones. 
+// El nombre de la funcion deberia reflejar lo que la funcion hace - si no es imposible entender lo que hace su codigo
+
+// Su seccion balances no se actualiza cuando agregamos o editamos una operacion - deberiamos estar llamando 
+// a esta funcion cada vez que agregamos o editamos. 
 const separarPorCategoria = () => {
 
   let arrayOperacionPorCategoria = [];
@@ -581,6 +641,7 @@ const separarPorCategoria = () => {
   let sumaGanancias = 0;
   for (let i = 0; i < arrayOperacionPorCategoria.length; i++) {
      for (let j = 0; j < arrayOperacionPorCategoria[i].length; j++) {
+      //  dejen espacios entre los parentesis y las llaves en el if else!
        if(arrayOperacionPorCategoria[i][j].tipo === "Gastos"){
           sumaGastos = sumaGastos + Number(arrayOperacionPorCategoria[i][j].monto)
       
